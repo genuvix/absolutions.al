@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AB Solutions</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,13 +60,13 @@
     }
     .brand{
       display:flex; align-items:center; gap:12px;
-      min-width:240px;
+      /* min-width:240px; */
     }
     .brand img{
       width:42px; height:42px; border-radius:14px;
       background:rgba(255,255,255,.9);
       border:1px solid var(--border);
-      padding:7px;
+      padding:2px;
       box-shadow:var(--shadow2);
       object-fit:contain;
     }
@@ -134,8 +135,25 @@
     }
 
     /* Mobile menu */
-    .mobileMenu{display:none; padding:0 0 16px 0}
-    .mobileMenu.show{display:block}
+.mobileMenu{
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    max-height 0.35s ease,
+    opacity 0.25s ease,
+    transform 0.35s ease;
+  visibility: hidden;
+}
+
+.mobileMenu.show{
+  max-height: 520px; /* enough to fit content */
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
     .mobilePanel{
       border:1px solid var(--border);
       background:rgba(255,255,255,.92);
@@ -413,14 +431,15 @@
     .reveal.in{opacity:1; transform:translateY(0)}
 
     /* Responsive */
-    @media (max-width: 980px){
-      .heroGrid{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr 1fr}
-      .contactGrid{grid-template-columns:1fr}
-      nav{display:none}
-      .hamburger{display:inline-grid; place-items:center}
-      .mobileMenu{display:block}
-    }
+@media (max-width: 980px){
+  .heroGrid{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr 1fr}
+  .contactGrid{grid-template-columns:1fr}
+  nav{display:none}
+  .hamburger{display:inline-grid; place-items:center}
+  .mobileMenu{display:none} /* Hidden by default */
+  .mobileMenu.show{display:block} /* Show when toggled */
+}
     @media (max-width: 560px){
       .container{width:min(var(--max), calc(100% - 28px))}
       .grid{grid-template-columns:1fr}
@@ -436,11 +455,11 @@
   <div class="container">
     <div class="topbar">
       <a class="brand" href="#home" aria-label="AB Solutions home">
-        <img src="logo.png" alt="AB Solutions logo" />
-        <div>
+        <img src="images/favicon.ico" alt="AB Solutions logo" />
+        <!-- <div>
           <div class="name" id="siteName">AB Solutions</div>
           <div class="tag" id="siteTag">Property management • Cleaning • Maintenance</div>
-        </div>
+        </div> -->
       </a>
 
       <nav aria-label="Primary navigation">
@@ -462,12 +481,12 @@
           <option value="it">Italiano</option>
         </select>
 
-        <a class="btn primary" href="#contact" id="quoteBtn">Get a quote</a>
+        <a class="btn primary" href="#contact" id="quoteBtn">Call</a>
         <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
       </div>
     </div>
 
-    <div class="mobileMenu" id="mobileMenu" style="display:none;">
+    <div class="mobileMenu" id="mobileMenu">
       <div class="mobilePanel">
         <a href="#home" data-mnav="home">Home</a>
         <a href="#housing" data-mnav="housing">Housing</a>
@@ -476,7 +495,7 @@
         <a href="#contact" data-mnav="contact">Contact</a>
 
         <div class="mobileRow">
-          <a class="btn primary" style="flex:1" href="#contact" id="quoteBtnMobile">Get a quote</a>
+          <a class="btn primary" style="flex:1" href="#contact" id="quoteBtnMobile">Call</a>
           <a class="btn" style="flex:1" href="#housing" id="servicesBtnMobile">See services</a>
         </div>
       </div>
@@ -489,16 +508,15 @@
   <section class="section--white" id="home">
     <div class="container heroGrid">
       <div class="card heroLeft reveal">
-        <div class="pill" id="heroPill">One team for hosting + maintenance</div>
-        <h1 id="heroTitle">AB Solutions — Property management & maintenance</h1>
+        <div class="pill" id="heroPill">Housing & Maintenance</div>
+        <h1 id="heroTitle">AB Solutions</h1>
         <p class="lead" id="heroLead">
-          Apartments, houses, offices, restaurants — we manage bookings, guests, reporting, cleaning, and repairs.
-          Clear monthly/yearly administration with premium service.
+          Apartments, houses, offices, restaurants. We manage bookings, guests, reporting, cleaning, and repairs.
         </p>
+        <br>
         <div class="heroCtas">
           <a class="btn primary" href="#contact" id="heroCta1">Get a quote</a>
           <a class="btn" href="#housing" id="heroCta2">See services</a>
-          <a class="btn ghost" href="#pricing" id="heroCta3">View packages</a>
         </div>
       </div>
 
@@ -507,12 +525,12 @@
           <div class="heroOverlay"></div>
           <div class="heroBadgeRow">
             <div class="badge">
-              <div class="v" id="kpi1">24/7</div>
-              <div class="l" id="kpi1Label">Guest support</div>
+              <div class="v" id="kpi1">✔</div>
+              <div class="l" id="kpi1Label">Housing</div>
             </div>
             <div class="badge">
-              <div class="v" id="kpi2">✔</div>
-              <div class="l" id="kpi2Label">Cleaning & inspections</div>
+              <div class="v" id="kpi2">24/7</div>
+              <div class="l" id="kpi2Label">Cleaning & Maintenance</div>
             </div>
           </div>
         </div>
@@ -523,8 +541,8 @@
             <div class="t" id="stat1">Properties supported</div>
           </div>
           <div class="stat">
-            <div class="n" data-counter="1200">0</div>
-            <div class="t" id="stat2">Cleanings / year</div>
+            <div class="n">+<span data-counter="200">0</span></div>
+            <div class="t" id="stat2">Online Platforms</div>
           </div>
           <div class="stat">
             <div class="n" data-counter="4.9">0</div>
@@ -540,7 +558,7 @@
     <div class="container">
       <div class="sectionHead reveal">
         <div>
-          <h2 id="housingTitle">Housing & Hosting</h2>
+          <h2 id="housingTitle">Housing</h2>
           <p id="housingDesc">Airbnb, Booking.com, long-term rentals — we handle everything from listings to reporting.</p>
         </div>
         <a class="btn primary" href="#contact" id="housingCta">Ask for availability</a>
@@ -563,7 +581,7 @@
     <div class="container">
       <div class="sectionHead reveal">
         <div>
-          <h2 id="maintTitle">Maintenance & Cleaning</h2>
+          <h2 id="maintTitle">Cleaning & Inspections</h2>
           <p id="maintDesc">Professional cleaning, inspections, repairs, and ongoing maintenance for all property types.</p>
         </div>
         <a class="btn primary" href="#contact" id="maintCta">Book a service</a>
@@ -611,7 +629,7 @@
           <iframe
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=Vienna&output=embed"
+            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2999.8219271377866!2d19.518489976052585!3d41.247436671317985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDHCsDE0JzUwLjgiTiAxOcKwMzEnMTUuOCJF!5e0!3m2!1sen!2smk!4v1770575144198!5m2!1sen!2smk"
             title="AB Solutions location"
           ></iframe>
         </div>
@@ -634,15 +652,11 @@
             </div>
             <div class="contactItem">
               <div class="k" id="cPhoneK">Phone</div>
-              <div class="v">+43 000 000 000</div>
-            </div>
-            <div class="contactItem">
-              <div class="k" id="cWhatsK">WhatsApp</div>
-              <div class="v">+43 000 000 000</div>
+              <div class="v">+355 69 607 7737</div>
             </div>
             <div class="contactItem">
               <div class="k" id="cAddrK">Address</div>
-              <div class="v" id="addressVal">Your street, City</div>
+              <div class="v" id="addressVal">Qemal Stafa, Golem</div>
             </div>
           </div>
 
@@ -651,9 +665,9 @@
             <input id="fEmail" type="email" placeholder="Your email" required />
             <textarea id="fMsg" placeholder="What do you need? (housing / cleaning / maintenance)" required></textarea>
             <button class="btn primary" type="submit" id="sendBtn">Send message</button>
-            <div style="color:var(--muted); font-size:12px; line-height:1.5">
+            <!-- <div style="color:var(--muted); font-size:12px; line-height:1.5">
               Language is saved locally on this site only (localStorage key: <b>absolutions:lang</b>).
-            </div>
+            </div> -->
           </form>
         </div>
       </div>
@@ -675,20 +689,20 @@
     en: {
       siteTag:"Property management • Cleaning • Maintenance",
       nav:{ home:"Home", housing:"Housing", maintenance:"Maintenance", pricing:"Pricing", contact:"Contact" },
-      quote:"Get a quote",
+      quote:"Give us a call",
       services:"See services",
       viewPackages:"View packages",
 
-      heroPill:"One team for hosting + maintenance",
-      heroTitle:"AB Solutions — Property management & maintenance",
-      heroLead:"Apartments, houses, offices, restaurants — we manage bookings, guests, reporting, cleaning, and repairs. Clear monthly/yearly administration with premium service.",
-      kpi1:"24/7", kpi1Label:"Guest support",
-      kpi2:"✔", kpi2Label:"Cleaning & inspections",
+      heroPill:"Housing & Maintenance",
+      heroTitle:"AB Solutions",
+      heroLead:"Apartments, houses, offices, restaurants. We manage bookings, guests, reporting, cleaning, and repairs.",
+      kpi1:"✔", kpi1Label:"Housing",
+      kpi2:"24/7", kpi2Label:"Cleaning & Maintenance",
       stat1:"Properties supported",
-      stat2:"Cleanings / year",
+      stat2:"Online Platforms",
       stat3:"Average rating",
 
-      housingTitle:"Housing & Hosting",
+      housingTitle:"Housing",
       housingDesc:"Airbnb, Booking.com, long-term rentals — we handle everything from listings to reporting.",
       housingCta:"Ask for availability",
       housingMini:"Monthly & yearly administration options available.",
@@ -697,7 +711,7 @@
 
       housingCards:[
         {icon:"AB", title:"Airbnb / Booking Management", desc:"Calendar sync, pricing, guest messaging, check-in/out coordination."},
-        {icon:"¥", title:"Monthly Administration", desc:"Transparent monthly reports, invoices, occupancy & cost tracking."},
+        {icon:"¥", title:"Monthly / Yearly Administration", desc:"Transparent monthly reports, invoices, occupancy & cost tracking."},
         {icon:"★", title:"Listing & Optimization", desc:"Better photos, descriptions, pricing strategy, review improvement."},
       ],
       housingMoreTitle:"What’s included",
@@ -709,12 +723,12 @@
         "Suitable for apartments, houses, offices, restaurants",
       ],
 
-      maintTitle:"Maintenance & Cleaning",
+      maintTitle:"Cleaning & Maintenance",
       maintDesc:"Professional cleaning, inspections, repairs, and ongoing maintenance for all property types.",
       maintCta:"Book a service",
       maintMini:"From deep cleans to handyman fixes — fast & reliable.",
       maintCards:[
-        {icon:"✦", title:"Professional Cleaning", desc:"Standard, deep clean, post-guest clean, offices & restaurants."},
+        {icon:"✦", title:"Professional Cleaning", desc:"Standard, deep clean, post-guest clean, parks, offices & restaurants."},
         {icon:"⚙", title:"Maintenance & Repairs", desc:"Handyman fixes, small repairs, urgent problems, coordination."},
         {icon:"☑", title:"Inspections & Supplies", desc:"Inventory checks, linen & supplies, photo reports."},
       ],
@@ -1118,7 +1132,7 @@
     localStorage.setItem(LS_KEY, lang);
     $("langSelect").value = lang;
 
-    $("siteTag").textContent = t.siteTag;
+    // $("siteTag").textContent = t.siteTag;
     document.querySelectorAll("nav a").forEach(a => a.textContent = t.nav[a.dataset.nav]);
 
     document.querySelectorAll("[data-mnav]").forEach(a => a.textContent = t.nav[a.dataset.mnav]);
@@ -1132,7 +1146,6 @@
     $("heroLead").textContent = t.heroLead;
     $("heroCta1").textContent = t.quote;
     $("heroCta2").textContent = t.services;
-    $("heroCta3").textContent = t.viewPackages;
 
     $("kpi1").textContent = t.kpi1;
     $("kpi1Label").textContent = t.kpi1Label;
@@ -1168,7 +1181,7 @@
 
     $("cEmailK").textContent = t.cEmailK;
     $("cPhoneK").textContent = t.cPhoneK;
-    $("cWhatsK").textContent = t.cWhatsK;
+    // $("cWhatsK").textContent = t.cWhatsK;
     $("cAddrK").textContent = t.cAddrK;
 
     $("fName").placeholder = t.fName;
@@ -1234,11 +1247,19 @@
   // Mobile menu toggle
   const mobileMenu = $("mobileMenu");
   const hamburger = $("hamburger");
-  function setMobileMenuVisibility(){
-    const isSmall = window.matchMedia("(max-width: 980px)").matches;
-    mobileMenu.style.display = isSmall ? "block" : "none";
-    if(!isSmall) mobileMenu.classList.remove("show");
+function setMobileMenuVisibility(){
+  const isSmall = window.matchMedia("(max-width: 980px)").matches;
+  // Only hide the hamburger on larger screens, keep mobile menu hidden initially
+  hamburger.style.display = isSmall ? "inline-grid" : "none";
+  if(!isSmall) {
+    mobileMenu.classList.remove("show");
+    // Also show the regular nav on larger screens
+    document.querySelector("nav").style.display = "flex";
+  } else {
+    // Hide regular nav on small screens
+    document.querySelector("nav").style.display = "none";
   }
+}
   setMobileMenuVisibility();
   window.addEventListener("resize", setMobileMenuVisibility);
 
