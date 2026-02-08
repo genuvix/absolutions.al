@@ -1,0 +1,1279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AB Solutions</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Brand */
+      --blue:#0B5391;
+      --mint:#55D3C1;
+
+      /* Light UI */
+      --bg:#f6f8fb;
+      --white:#ffffff;
+      --text:#0b1320;
+      --muted:rgba(11,19,32,.64);
+      --border:rgba(10,20,30,.10);
+      --shadow: 0 18px 60px rgba(10,20,30,.10);
+      --shadow2: 0 10px 30px rgba(10,20,30,.08);
+      --radius:18px;
+      --max:1120px;
+
+      /* Section tints */
+      --blueTint: rgba(11,83,145,.08);
+      --mintTint: rgba(85,211,193,.12);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background: radial-gradient(1000px 700px at 15% 0%, rgba(85,211,193,.18), transparent 55%),
+                  radial-gradient(1000px 700px at 90% 5%, rgba(11,83,145,.12), transparent 55%),
+                  linear-gradient(180deg, #ffffff 0%, var(--bg) 55%, #ffffff 100%);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .container{width:min(var(--max), calc(100% - 40px)); margin:0 auto}
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width:240px;
+    }
+    .brand img{
+      width:42px; height:42px; border-radius:14px;
+      background:rgba(255,255,255,.9);
+      border:1px solid var(--border);
+      padding:7px;
+      box-shadow:var(--shadow2);
+      object-fit:contain;
+    }
+    .brand .name{font-weight:800; letter-spacing:-.2px}
+    .brand .tag{font-size:12px; color:var(--muted); margin-top:2px}
+
+    nav{display:flex; align-items:center; gap:12px}
+    nav a{
+      font-size:14px;
+      color:rgba(11,19,32,.75);
+      padding:10px 12px;
+      border-radius:14px;
+      transition:.18s ease;
+    }
+    nav a:hover{background:rgba(11,83,145,.06)}
+    nav a.active{
+      background: linear-gradient(135deg, rgba(11,83,145,.10), rgba(85,211,193,.12));
+      border:1px solid rgba(11,83,145,.12);
+      color:rgba(11,19,32,.95);
+    }
+
+    .actions{display:flex; align-items:center; gap:10px}
+    .select{
+      background:rgba(255,255,255,.92);
+      border:1px solid var(--border);
+      color:var(--text);
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:14px;
+      outline:none;
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.92);
+      color:rgba(11,19,32,.92);
+      font-weight:700;
+      font-size:14px;
+      cursor:pointer;
+      transition:.18s ease;
+      white-space:nowrap;
+      box-shadow:0 10px 25px rgba(10,20,30,.06);
+    }
+    .btn:hover{transform:translateY(-1px); box-shadow:0 14px 30px rgba(10,20,30,.09)}
+    .btn.primary{
+      border:none;
+      color:white;
+      background: linear-gradient(135deg, var(--blue), var(--mint));
+      box-shadow: 0 18px 45px rgba(11,83,145,.18);
+    }
+    .btn.ghost{
+      background:transparent;
+      box-shadow:none;
+    }
+    .hamburger{
+      display:none;
+      width:44px; height:44px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.92);
+      cursor:pointer;
+      box-shadow:0 10px 25px rgba(10,20,30,.06);
+    }
+
+    /* Mobile menu */
+    .mobileMenu{display:none; padding:0 0 16px 0}
+    .mobileMenu.show{display:block}
+    .mobilePanel{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.92);
+      border-radius:18px;
+      padding:10px;
+      box-shadow:var(--shadow2);
+    }
+    .mobilePanel a{
+      display:block;
+      padding:12px 12px;
+      border-radius:14px;
+      color:rgba(11,19,32,.85);
+    }
+    .mobilePanel a:hover{background:rgba(11,83,145,.06)}
+    .mobileRow{display:flex; gap:10px; padding:10px 8px 2px 8px; flex-wrap:wrap}
+
+    /* Section styles (different colors per section) */
+    section{padding:52px 0}
+    .section--white{background:transparent}
+    .section--blueTint{
+      background:
+        radial-gradient(900px 500px at 10% 10%, rgba(11,83,145,.12), transparent 55%),
+        linear-gradient(180deg, rgba(11,83,145,.06), rgba(11,83,145,.03));
+      border-top:1px solid rgba(11,83,145,.08);
+      border-bottom:1px solid rgba(11,83,145,.08);
+    }
+    .section--mintTint{
+      background:
+        radial-gradient(900px 500px at 90% 0%, rgba(85,211,193,.16), transparent 55%),
+        linear-gradient(180deg, rgba(85,211,193,.08), rgba(85,211,193,.03));
+      border-top:1px solid rgba(85,211,193,.10);
+      border-bottom:1px solid rgba(85,211,193,.10);
+    }
+
+    /* Hero */
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.06fr .94fr;
+      gap:20px;
+      align-items:stretch;
+    }
+    .heroLeft{padding:28px}
+    .card{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.86);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:700;
+      color:rgba(11,19,32,.85);
+      background: linear-gradient(135deg, rgba(11,83,145,.10), rgba(85,211,193,.12));
+      border:1px solid rgba(11,83,145,.10);
+      width:fit-content;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0 0 12px 0;
+      font-size:clamp(32px, 4.6vw, 52px);
+      line-height:1.05;
+      letter-spacing:-.8px;
+    }
+    .lead{
+      margin:0 0 18px 0;
+      color:var(--muted);
+      font-size:15.5px;
+      line-height:1.65;
+      max-width:62ch;
+    }
+    .heroCtas{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+
+    .heroRight{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .heroMedia{
+      position:relative;
+      border-radius:18px;
+      border:1px solid var(--border);
+      overflow:hidden;
+      min-height:250px;
+      box-shadow:var(--shadow2);
+      background: #fff;
+    }
+    .heroMedia::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 300px at 20% 10%, rgba(85,211,193,.25), transparent 55%),
+        radial-gradient(900px 300px at 80% 0%, rgba(11,83,145,.18), transparent 55%),
+        url("https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1400&q=70")
+        center/cover no-repeat;
+      filter:saturate(1.02) contrast(1.03);
+      transform:scale(1.02);
+      opacity:.94;
+    }
+    .heroOverlay{
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.82));
+    }
+    .heroBadgeRow{
+      position:absolute; left:14px; right:14px; bottom:14px;
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between;
+    }
+    .badge{
+      flex:1;
+      min-width:150px;
+      padding:12px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.85);
+      box-shadow:0 12px 25px rgba(10,20,30,.08);
+    }
+    .badge .v{font-weight:900; font-size:18px}
+    .badge .l{font-size:12px; color:var(--muted); margin-top:4px}
+
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    .stat{
+      padding:14px;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.86);
+      box-shadow:0 10px 25px rgba(10,20,30,.05);
+    }
+    .stat .n{font-size:22px; font-weight:900}
+    .stat .t{font-size:12px; color:var(--muted); margin-top:4px}
+
+    /* Section headers + cards */
+    .sectionHead{
+      display:flex; justify-content:space-between; align-items:flex-end;
+      gap:14px; margin-bottom:16px;
+    }
+    .sectionHead h2{
+      margin:0;
+      font-size:24px;
+      letter-spacing:-.3px;
+    }
+    .sectionHead p{
+      margin:6px 0 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+      max-width:72ch;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .svc{
+      padding:16px;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.88);
+      box-shadow:0 10px 25px rgba(10,20,30,.06);
+      transition:.18s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .svc:hover{transform:translateY(-2px)}
+    .svc::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(600px 220px at 10% 0%, rgba(85,211,193,.18), transparent 55%);
+      opacity:0;
+      transition:.25s ease;
+    }
+    .svc:hover::before{opacity:1}
+    .svc > *{position:relative}
+
+    .icon{
+      width:42px; height:42px;
+      border-radius:14px;
+      display:grid; place-items:center;
+      font-weight:900;
+      color:#fff;
+      background: linear-gradient(135deg, var(--blue), var(--mint));
+      box-shadow: 0 14px 28px rgba(11,83,145,.16);
+      margin-bottom:10px;
+    }
+    .svc h3{margin:0 0 6px 0; font-size:15px}
+    .svc p{margin:0; color:var(--muted); font-size:13px; line-height:1.55}
+
+    .moreWrap{
+      margin-top:14px;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.86);
+      box-shadow:0 10px 25px rgba(10,20,30,.05);
+      overflow:hidden;
+    }
+    .moreBar{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:12px 12px;
+    }
+    .mini{color:var(--muted); font-size:13px}
+    .moreContent{display:none; padding:0 12px 14px 12px}
+    .moreContent ul{
+      margin:10px 0 0 0; padding-left:18px;
+      color:rgba(11,19,32,.78);
+      line-height:1.65;
+      font-size:13px;
+    }
+
+    /* Contact */
+    .contactGrid{
+      display:grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    iframe{
+      width:100%;
+      min-height:380px;
+      border:0;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background:#fff;
+      box-shadow:var(--shadow2);
+    }
+    .contactCard{padding:16px}
+    .contactTop{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+    .contactItems{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .contactItem{
+      padding:12px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.90);
+    }
+    .contactItem .k{font-size:12px; color:var(--muted)}
+    .contactItem .v{margin-top:6px; font-weight:700; font-size:14px; word-break:break-word}
+
+    form{margin-top:12px; display:grid; gap:10px}
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.94);
+      color:var(--text);
+      outline:none;
+      font:inherit;
+      box-shadow:0 10px 20px rgba(10,20,30,.04);
+    }
+    textarea{min-height:110px; resize:vertical}
+
+    footer{
+      padding:22px 0 30px 0;
+      color:rgba(11,19,32,.60);
+      font-size:13px;
+      border-top:1px solid var(--border);
+      background:rgba(255,255,255,.55);
+    }
+
+    /* Reveal */
+    .reveal{opacity:0; transform:translateY(10px); transition:.55s ease}
+    .reveal.in{opacity:1; transform:translateY(0)}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .heroGrid{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr 1fr}
+      .contactGrid{grid-template-columns:1fr}
+      nav{display:none}
+      .hamburger{display:inline-grid; place-items:center}
+      .mobileMenu{display:block}
+    }
+    @media (max-width: 560px){
+      .container{width:min(var(--max), calc(100% - 28px))}
+      .grid{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr}
+      .contactItems{grid-template-columns:1fr}
+      .heroLeft{padding:20px}
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="container">
+    <div class="topbar">
+      <a class="brand" href="#home" aria-label="AB Solutions home">
+        <img src="logo.png" alt="AB Solutions logo" />
+        <div>
+          <div class="name" id="siteName">AB Solutions</div>
+          <div class="tag" id="siteTag">Property management • Cleaning • Maintenance</div>
+        </div>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <a href="#home" data-nav="home">Home</a>
+        <a href="#housing" data-nav="housing">Housing</a>
+        <a href="#maintenance" data-nav="maintenance">Maintenance</a>
+        <a href="#pricing" data-nav="pricing">Pricing</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+      </nav>
+
+      <div class="actions">
+        <select class="select" id="langSelect" aria-label="Language selector">
+          <option value="en">English</option>
+          <option value="sq">Shqip</option>
+          <option value="de">Deutsch</option>
+          <option value="pl">Polski</option>
+          <option value="cs">Čeština</option>
+          <option value="sk">Slovenčina</option>
+          <option value="it">Italiano</option>
+        </select>
+
+        <a class="btn primary" href="#contact" id="quoteBtn">Get a quote</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+
+    <div class="mobileMenu" id="mobileMenu" style="display:none;">
+      <div class="mobilePanel">
+        <a href="#home" data-mnav="home">Home</a>
+        <a href="#housing" data-mnav="housing">Housing</a>
+        <a href="#maintenance" data-mnav="maintenance">Maintenance</a>
+        <a href="#pricing" data-mnav="pricing">Pricing</a>
+        <a href="#contact" data-mnav="contact">Contact</a>
+
+        <div class="mobileRow">
+          <a class="btn primary" style="flex:1" href="#contact" id="quoteBtnMobile">Get a quote</a>
+          <a class="btn" style="flex:1" href="#housing" id="servicesBtnMobile">See services</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO (mostly white) -->
+  <section class="section--white" id="home">
+    <div class="container heroGrid">
+      <div class="card heroLeft reveal">
+        <div class="pill" id="heroPill">One team for hosting + maintenance</div>
+        <h1 id="heroTitle">AB Solutions — Property management & maintenance</h1>
+        <p class="lead" id="heroLead">
+          Apartments, houses, offices, restaurants — we manage bookings, guests, reporting, cleaning, and repairs.
+          Clear monthly/yearly administration with premium service.
+        </p>
+        <div class="heroCtas">
+          <a class="btn primary" href="#contact" id="heroCta1">Get a quote</a>
+          <a class="btn" href="#housing" id="heroCta2">See services</a>
+          <a class="btn ghost" href="#pricing" id="heroCta3">View packages</a>
+        </div>
+      </div>
+
+      <div class="card heroRight reveal">
+        <div class="heroMedia">
+          <div class="heroOverlay"></div>
+          <div class="heroBadgeRow">
+            <div class="badge">
+              <div class="v" id="kpi1">24/7</div>
+              <div class="l" id="kpi1Label">Guest support</div>
+            </div>
+            <div class="badge">
+              <div class="v" id="kpi2">✔</div>
+              <div class="l" id="kpi2Label">Cleaning & inspections</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="n" data-counter="48">0</div>
+            <div class="t" id="stat1">Properties supported</div>
+          </div>
+          <div class="stat">
+            <div class="n" data-counter="1200">0</div>
+            <div class="t" id="stat2">Cleanings / year</div>
+          </div>
+          <div class="stat">
+            <div class="n" data-counter="4.9">0</div>
+            <div class="t" id="stat3">Average rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOUSING (blue-tint section) -->
+  <section class="section--blueTint" id="housing">
+    <div class="container">
+      <div class="sectionHead reveal">
+        <div>
+          <h2 id="housingTitle">Housing & Hosting</h2>
+          <p id="housingDesc">Airbnb, Booking.com, long-term rentals — we handle everything from listings to reporting.</p>
+        </div>
+        <a class="btn primary" href="#contact" id="housingCta">Ask for availability</a>
+      </div>
+
+      <div class="grid reveal" id="housingGrid"></div>
+
+      <div class="moreWrap reveal">
+        <div class="moreBar">
+          <div class="mini" id="housingMini">Monthly & yearly administration options available.</div>
+          <button class="btn" id="housingMoreBtn">Read more</button>
+        </div>
+        <div class="moreContent" id="housingMore"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAINTENANCE (mint-tint section) -->
+  <section class="section--mintTint" id="maintenance">
+    <div class="container">
+      <div class="sectionHead reveal">
+        <div>
+          <h2 id="maintTitle">Maintenance & Cleaning</h2>
+          <p id="maintDesc">Professional cleaning, inspections, repairs, and ongoing maintenance for all property types.</p>
+        </div>
+        <a class="btn primary" href="#contact" id="maintCta">Book a service</a>
+      </div>
+
+      <div class="grid reveal" id="maintGrid"></div>
+
+      <div class="moreWrap reveal">
+        <div class="moreBar">
+          <div class="mini" id="maintMini">From deep cleans to handyman fixes — fast & reliable.</div>
+          <button class="btn" id="maintMoreBtn">Read more</button>
+        </div>
+        <div class="moreContent" id="maintMore"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING (white section again) -->
+  <section class="section--white" id="pricing">
+    <div class="container">
+      <div class="sectionHead reveal">
+        <div>
+          <h2 id="pricingTitle">Packages</h2>
+          <p id="pricingDesc">Choose monthly or yearly administration. Custom quotes for multiple properties.</p>
+        </div>
+      </div>
+
+      <div class="grid reveal" id="pricingGrid"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT (white section + map) -->
+  <section class="section--white" id="contact">
+    <div class="container">
+      <div class="sectionHead reveal">
+        <div>
+          <h2 id="contactTitle">Contact</h2>
+          <p id="contactDesc">Tell us what you manage and we’ll reply with a plan.</p>
+        </div>
+      </div>
+
+      <div class="contactGrid">
+        <div class="reveal">
+          <!-- Replace with your real location -->
+          <iframe
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Vienna&output=embed"
+            title="AB Solutions location"
+          ></iframe>
+        </div>
+
+        <div class="card contactCard reveal">
+          <div class="contactTop">
+            <div>
+              <div style="font-weight:900; font-size:16px;" id="contactCardTitle">AB Solutions</div>
+              <div style="color:var(--muted); font-size:13px; margin-top:4px;" id="contactCardSub">
+                Fast replies • Clear pricing • Professional team
+              </div>
+            </div>
+            <a class="btn primary" href="mailto:hello@absolutions.com" id="emailBtn">Email us</a>
+          </div>
+
+          <div class="contactItems">
+            <div class="contactItem">
+              <div class="k" id="cEmailK">Email</div>
+              <div class="v">hello@absolutions.com</div>
+            </div>
+            <div class="contactItem">
+              <div class="k" id="cPhoneK">Phone</div>
+              <div class="v">+43 000 000 000</div>
+            </div>
+            <div class="contactItem">
+              <div class="k" id="cWhatsK">WhatsApp</div>
+              <div class="v">+43 000 000 000</div>
+            </div>
+            <div class="contactItem">
+              <div class="k" id="cAddrK">Address</div>
+              <div class="v" id="addressVal">Your street, City</div>
+            </div>
+          </div>
+
+          <form id="contactForm">
+            <input id="fName" type="text" placeholder="Your name" required />
+            <input id="fEmail" type="email" placeholder="Your email" required />
+            <textarea id="fMsg" placeholder="What do you need? (housing / cleaning / maintenance)" required></textarea>
+            <button class="btn primary" type="submit" id="sendBtn">Send message</button>
+            <div style="color:var(--muted); font-size:12px; line-height:1.5">
+              Language is saved locally on this site only (localStorage key: <b>absolutions:lang</b>).
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+      <div id="footerLeft">© <span id="year"></span> AB Solutions. All rights reserved.</div>
+      <div id="footerRight">Housing • Hosting • Cleaning • Maintenance</div>
+    </div>
+  </footer>
+</main>
+
+<script>
+  const LS_KEY = "absolutions:lang";
+
+  const i18n = {
+    en: {
+      siteTag:"Property management • Cleaning • Maintenance",
+      nav:{ home:"Home", housing:"Housing", maintenance:"Maintenance", pricing:"Pricing", contact:"Contact" },
+      quote:"Get a quote",
+      services:"See services",
+      viewPackages:"View packages",
+
+      heroPill:"One team for hosting + maintenance",
+      heroTitle:"AB Solutions — Property management & maintenance",
+      heroLead:"Apartments, houses, offices, restaurants — we manage bookings, guests, reporting, cleaning, and repairs. Clear monthly/yearly administration with premium service.",
+      kpi1:"24/7", kpi1Label:"Guest support",
+      kpi2:"✔", kpi2Label:"Cleaning & inspections",
+      stat1:"Properties supported",
+      stat2:"Cleanings / year",
+      stat3:"Average rating",
+
+      housingTitle:"Housing & Hosting",
+      housingDesc:"Airbnb, Booking.com, long-term rentals — we handle everything from listings to reporting.",
+      housingCta:"Ask for availability",
+      housingMini:"Monthly & yearly administration options available.",
+      readMore:"Read more",
+      readLess:"Read less",
+
+      housingCards:[
+        {icon:"AB", title:"Airbnb / Booking Management", desc:"Calendar sync, pricing, guest messaging, check-in/out coordination."},
+        {icon:"¥", title:"Monthly Administration", desc:"Transparent monthly reports, invoices, occupancy & cost tracking."},
+        {icon:"★", title:"Listing & Optimization", desc:"Better photos, descriptions, pricing strategy, review improvement."},
+      ],
+      housingMoreTitle:"What’s included",
+      housingMoreBullets:[
+        "Guest communication (pre-arrival, during stay, after checkout)",
+        "Check-in/out coordination and key handling",
+        "Monthly or yearly administration with clear documentation",
+        "Issue reporting + coordination with cleaning/maintenance teams",
+        "Suitable for apartments, houses, offices, restaurants",
+      ],
+
+      maintTitle:"Maintenance & Cleaning",
+      maintDesc:"Professional cleaning, inspections, repairs, and ongoing maintenance for all property types.",
+      maintCta:"Book a service",
+      maintMini:"From deep cleans to handyman fixes — fast & reliable.",
+      maintCards:[
+        {icon:"✦", title:"Professional Cleaning", desc:"Standard, deep clean, post-guest clean, offices & restaurants."},
+        {icon:"⚙", title:"Maintenance & Repairs", desc:"Handyman fixes, small repairs, urgent problems, coordination."},
+        {icon:"☑", title:"Inspections & Supplies", desc:"Inventory checks, linen & supplies, photo reports."},
+      ],
+      maintMoreTitle:"Maintenance services",
+      maintMoreBullets:[
+        "Daily/weekly/monthly cleaning plans",
+        "Deep cleaning + seasonal refresh",
+        "Electrical/plumbing coordination (via partners if needed)",
+        "Garden/park upkeep (optional)",
+        "Before/after photo documentation",
+      ],
+
+      pricingTitle:"Packages",
+      pricingDesc:"Choose monthly or yearly administration. Custom quotes for multiple properties.",
+      pricingCards:[
+        {icon:"1", title:"Monthly Admin", desc:"For owners who want reporting + coordination.", tag:"Best for long-term"},
+        {icon:"2", title:"Full Hosting", desc:"Airbnb/Booking management + cleaning + support.", tag:"Best for short-stay"},
+        {icon:"3", title:"Yearly Contract", desc:"Discounted yearly administration with priority service.", tag:"Best value"},
+      ],
+
+      contactTitle:"Contact",
+      contactDesc:"Tell us what you manage and we’ll reply with a plan.",
+      contactCardSub:"Fast replies • Clear pricing • Professional team",
+      emailBtn:"Email us",
+      cEmailK:"Email", cPhoneK:"Phone", cWhatsK:"WhatsApp", cAddrK:"Address",
+      fName:"Your name", fEmail:"Your email",
+      fMsg:"What do you need? (housing / cleaning / maintenance)",
+      sendBtn:"Send message",
+      footerRight:"Housing • Hosting • Cleaning • Maintenance",
+    },
+
+    /* Same languages as before (short, clean). */
+    sq: {
+      siteTag:"Menaxhim pronash • Pastrim • Mirëmbajtje",
+      nav:{ home:"Kryefaqe", housing:"Strehim", maintenance:"Mirëmbajtje", pricing:"Paketa", contact:"Kontakt" },
+      quote:"Merr ofertë", services:"Shiko shërbimet", viewPackages:"Shiko paketat",
+      heroPill:"Një ekip për hosting + mirëmbajtje",
+      heroTitle:"AB Solutions — Menaxhim pronash & mirëmbajtje",
+      heroLead:"Apartamente, shtëpi, zyra, restorante — menaxhojmë rezervimet, mysafirët, raportimin, pastrimin dhe riparimet. Administrim mujor/vjetor i qartë.",
+      kpi1:"24/7", kpi1Label:"Mbështetje për mysafirë", kpi2:"✔", kpi2Label:"Pastrim & inspektime",
+      stat1:"Prona të mbështetura", stat2:"Pastrime / vit", stat3:"Vlerësim mesatar",
+      housingTitle:"Strehim & Hosting",
+      housingDesc:"Airbnb, Booking.com, qira afatgjatë — nga listimi deri te raportimi.",
+      housingCta:"Pyet për disponueshmëri",
+      housingMini:"Opsione administrimi mujor dhe vjetor.",
+      readMore:"Lexo më shumë", readLess:"Lexo më pak",
+      housingCards:[
+        {icon:"AB", title:"Menaxhim Airbnb / Booking", desc:"Kalendari, çmimet, mesazhet, koordinimi check-in/out."},
+        {icon:"¥", title:"Administrim Mujor", desc:"Raporte të qarta mujore, fatura, analiza kostoje."},
+        {icon:"★", title:"Listim & Optimizim", desc:"Foto, përshkrime, strategji çmimesh, review."},
+      ],
+      housingMoreTitle:"Çfarë përfshihet",
+      housingMoreBullets:[
+        "Komunikim me mysafirët (para/djatë/pas qëndrimit)",
+        "Koordinim check-in/out dhe menaxhim çelësash",
+        "Administrim mujor/vjetor me dokumentacion",
+        "Raportim problemesh + koordinim me ekipet",
+        "Për apartamente, shtëpi, zyra, restorante",
+      ],
+      maintTitle:"Mirëmbajtje & Pastrim",
+      maintDesc:"Pastrime profesionale, inspektime, riparime dhe mirëmbajtje e vazhdueshme.",
+      maintCta:"Rezervo shërbim",
+      maintMini:"Nga deep cleans te riparime të shpejta — të besueshëm.",
+      maintCards:[
+        {icon:"✦", title:"Pastrim Profesional", desc:"Standard, deep clean, pas mysafirëve, zyra & restorante."},
+        {icon:"⚙", title:"Mirëmbajtje & Riparime", desc:"Rregullime të vogla, urgjenca, koordinim."},
+        {icon:"☑", title:"Inspektime & Furnizime", desc:"Kontroll inventari, liri/furnizime, raporte me foto."},
+      ],
+      maintMoreTitle:"Shërbime mirëmbajtjeje",
+      maintMoreBullets:[
+        "Plane pastrimi ditor/javor/mujor",
+        "Deep cleaning + freskim sezonal",
+        "Koordinim elektrike/ujësjellës (partnerë)",
+        "Mirëmbajtje oborri/parku (opsionale)",
+        "Dokumentim me foto para/pas",
+      ],
+      pricingTitle:"Paketa",
+      pricingDesc:"Zgjidh administrim mujor ose vjetor. Ofertë për më shumë prona.",
+      pricingCards:[
+        {icon:"1", title:"Admin Mujor", desc:"Raportim + koordinim.", tag:"Për afatgjatë"},
+        {icon:"2", title:"Full Hosting", desc:"Menaxhim + pastrim + mbështetje.", tag:"Për Airbnb/Booking"},
+        {icon:"3", title:"Kontratë Vjetore", desc:"Zbritje + prioritet.", tag:"Vlera më e mirë"},
+      ],
+      contactTitle:"Kontakt",
+      contactDesc:"Na trego çfarë menaxhon dhe do të kthehemi me plan.",
+      contactCardSub:"Përgjigje të shpejta • Çmime të qarta • Ekip profesional",
+      emailBtn:"Na shkruaj",
+      cEmailK:"Email", cPhoneK:"Telefon", cWhatsK:"WhatsApp", cAddrK:"Adresë",
+      fName:"Emri", fEmail:"Email-i",
+      fMsg:"Çfarë të duhet? (strehim / pastrim / mirëmbajtje)",
+      sendBtn:"Dërgo",
+      footerRight:"Strehim • Hosting • Pastrim • Mirëmbajtje",
+    },
+
+    de: {
+      siteTag:"Objektverwaltung • Reinigung • Instandhaltung",
+      nav:{ home:"Start", housing:"Wohnen", maintenance:"Service", pricing:"Pakete", contact:"Kontakt" },
+      quote:"Angebot", services:"Services", viewPackages:"Pakete",
+      heroPill:"Ein Team für Hosting + Service",
+      heroTitle:"AB Solutions — Verwaltung & Instandhaltung",
+      heroLead:"Apartments, Häuser, Büros, Restaurants — Buchungen, Gäste, Reporting, Reinigung und Reparaturen. Klare monatliche/jährliche Administration.",
+      kpi1:"24/7", kpi1Label:"Gästesupport", kpi2:"✔", kpi2Label:"Reinigung & Checks",
+      stat1:"Betreute Objekte", stat2:"Reinigungen / Jahr", stat3:"Bewertung",
+      housingTitle:"Wohnen & Hosting",
+      housingDesc:"Airbnb, Booking.com, Langzeitmiete — von Listing bis Reporting.",
+      housingCta:"Verfügbarkeit",
+      housingMini:"Monatliche & jährliche Administration verfügbar.",
+      readMore:"Mehr", readLess:"Weniger",
+      housingCards:[
+        {icon:"AB", title:"Airbnb / Booking Management", desc:"Kalender, Preise, Kommunikation, Check-in/out."},
+        {icon:"¥", title:"Monatliche Admin", desc:"Reports, Rechnungen, Auslastung & Kosten."},
+        {icon:"★", title:"Listing & Optimierung", desc:"Fotos, Texte, Preisstrategie, Bewertungen."},
+      ],
+      housingMoreTitle:"Inklusive",
+      housingMoreBullets:[
+        "Gästekommunikation (vor/während/nach dem Aufenthalt)",
+        "Check-in/out & Schlüssel",
+        "Monatliche/Jährliche Doku",
+        "Probleme melden + Teams koordinieren",
+        "Für Wohnungen, Häuser, Büros, Restaurants",
+      ],
+      maintTitle:"Instandhaltung & Reinigung",
+      maintDesc:"Reinigung, Checks, Reparaturen und laufende Betreuung.",
+      maintCta:"Service buchen",
+      maintMini:"Schnell & zuverlässig.",
+      maintCards:[
+        {icon:"✦", title:"Reinigung", desc:"Standard, Deep Clean, nach Gästen, Büros/Restaurants."},
+        {icon:"⚙", title:"Reparaturen", desc:"Handwerker-Fixes, kleine Reparaturen, Notfälle."},
+        {icon:"☑", title:"Checks & Material", desc:"Inventar, Wäsche, Fotoreports."},
+      ],
+      maintMoreTitle:"Serviceleistungen",
+      maintMoreBullets:[
+        "Reinigungspläne",
+        "Deep Cleaning + saisonal",
+        "Koordination Elektro/Installateur",
+        "Garten/Park (optional)",
+        "Fotodoku vorher/nachher",
+      ],
+      pricingTitle:"Pakete",
+      pricingDesc:"Monatlich oder jährlich. Individuell für mehrere Objekte.",
+      pricingCards:[
+        {icon:"1", title:"Monatlich", desc:"Reporting + Koordination.", tag:"Langzeit"},
+        {icon:"2", title:"Full Hosting", desc:"Management + Reinigung + Support.", tag:"Kurzzeit"},
+        {icon:"3", title:"Jährlich", desc:"Rabatt + Priorität.", tag:"Bestes Angebot"},
+      ],
+      contactTitle:"Kontakt",
+      contactDesc:"Sagen Sie uns, was Sie verwalten — wir antworten mit Plan.",
+      contactCardSub:"Schnell • Transparent • Professionell",
+      emailBtn:"E-Mail",
+      cEmailK:"E-Mail", cPhoneK:"Telefon", cWhatsK:"WhatsApp", cAddrK:"Adresse",
+      fName:"Name", fEmail:"E-Mail",
+      fMsg:"Wobei helfen wir? (Hosting / Reinigung / Service)",
+      sendBtn:"Senden",
+      footerRight:"Wohnen • Hosting • Reinigung • Service",
+    },
+
+    pl: { /* minimal but complete */
+      siteTag:"Zarządzanie • Sprzątanie • Serwis",
+      nav:{ home:"Start", housing:"Nieruchomości", maintenance:"Serwis", pricing:"Pakiety", contact:"Kontakt" },
+      quote:"Wycena", services:"Usługi", viewPackages:"Pakiety",
+      heroPill:"Jeden zespół: hosting + serwis",
+      heroTitle:"AB Solutions — Zarządzanie i utrzymanie",
+      heroLead:"Rezerwacje, goście, raporty, sprzątanie i naprawy. Administracja miesięczna/roczna.",
+      kpi1:"24/7", kpi1Label:"Wsparcie", kpi2:"✔", kpi2Label:"Kontrole",
+      stat1:"Obiekty", stat2:"Sprzątania / rok", stat3:"Ocena",
+      housingTitle:"Zarządzanie najmem",
+      housingDesc:"Airbnb, Booking, najem długoterminowy — pełna obsługa.",
+      housingCta:"Dostępność",
+      housingMini:"Opcje miesięczne i roczne.",
+      readMore:"Więcej", readLess:"Mniej",
+      housingCards:[
+        {icon:"AB", title:"Airbnb / Booking", desc:"Kalendarz, ceny, wiadomości, check-in/out."},
+        {icon:"¥", title:"Administracja", desc:"Raporty, faktury, koszty."},
+        {icon:"★", title:"Optymalizacja", desc:"Zdjęcia, opis, ceny, opinie."},
+      ],
+      housingMoreTitle:"Zakres",
+      housingMoreBullets:["Komunikacja z gośćmi","Check-in/out","Dokumentacja","Koordynacja ekip","Różne typy obiektów"],
+      maintTitle:"Serwis i sprzątanie",
+      maintDesc:"Sprzątanie, kontrole, naprawy i utrzymanie.",
+      maintCta:"Zarezerwuj",
+      maintMini:"Szybko i solidnie.",
+      maintCards:[
+        {icon:"✦", title:"Sprzątanie", desc:"Standard, deep clean, po gościach."},
+        {icon:"⚙", title:"Naprawy", desc:"Drobne naprawy, awarie."},
+        {icon:"☑", title:"Kontrole", desc:"Stany, materiały, zdjęcia."},
+      ],
+      maintMoreTitle:"Usługi",
+      maintMoreBullets:["Plany sprzątania","Deep cleaning","Koordynacja fachowców","Ogród (opc.)","Zdjęcia przed/po"],
+      pricingTitle:"Pakiety",
+      pricingDesc:"Miesięcznie lub rocznie.",
+      pricingCards:[
+        {icon:"1", title:"Miesięcznie", desc:"Raporty + koordynacja.", tag:"Długo"},
+        {icon:"2", title:"Full Hosting", desc:"Zarządzanie + sprzątanie.", tag:"Krótko"},
+        {icon:"3", title:"Rocznie", desc:"Zniżka + priorytet.", tag:"Najlepiej"},
+      ],
+      contactTitle:"Kontakt",
+      contactDesc:"Napisz czego potrzebujesz — odpowiemy.",
+      contactCardSub:"Szybko • Jasno • Profesjonalnie",
+      emailBtn:"Email",
+      cEmailK:"Email", cPhoneK:"Telefon", cWhatsK:"WhatsApp", cAddrK:"Adres",
+      fName:"Imię", fEmail:"Email",
+      fMsg:"Czego potrzebujesz? (najem / sprzątanie / serwis)",
+      sendBtn:"Wyślij",
+      footerRight:"Najem • Hosting • Sprzątanie • Serwis",
+    },
+
+    cs: { /* compact */
+      siteTag:"Správa • Úklid • Údržba",
+      nav:{ home:"Domů", housing:"Bydlení", maintenance:"Údržba", pricing:"Balíčky", contact:"Kontakt" },
+      quote:"Nabídka", services:"Služby", viewPackages:"Balíčky",
+      heroPill:"Jeden tým pro hosting + údržbu",
+      heroTitle:"AB Solutions — Správa a údržba",
+      heroLead:"Rezervace, hosté, reporty, úklid a opravy. Měsíční/roční správa.",
+      kpi1:"24/7", kpi1Label:"Podpora", kpi2:"✔", kpi2Label:"Kontroly",
+      stat1:"Objekty", stat2:"Úklidy / rok", stat3:"Hodnocení",
+      housingTitle:"Bydlení & Hosting",
+      housingDesc:"Airbnb, Booking, dlouhodobé — kompletní servis.",
+      housingCta:"Dostupnost",
+      housingMini:"Měsíčně i ročně.",
+      readMore:"Více", readLess:"Méně",
+      housingCards:[
+        {icon:"AB", title:"Airbnb / Booking", desc:"Kalendář, ceny, komunikace."},
+        {icon:"¥", title:"Administrace", desc:"Reporty, faktury, náklady."},
+        {icon:"★", title:"Optimalizace", desc:"Fotky, texty, ceny, recenze."},
+      ],
+      housingMoreTitle:"Zahrnuje",
+      housingMoreBullets:["Komunikace s hosty","Check-in/out","Dokumentace","Koordinace týmů","Různé typy objektů"],
+      maintTitle:"Údržba & Úklid",
+      maintDesc:"Úklid, kontroly, opravy a údržba.",
+      maintCta:"Objednat",
+      maintMini:"Rychle a spolehlivě.",
+      maintCards:[
+        {icon:"✦", title:"Úklid", desc:"Standard, deep clean, po hostech."},
+        {icon:"⚙", title:"Opravy", desc:"Drobné opravy, urgentní."},
+        {icon:"☑", title:"Kontroly", desc:"Inventář, materiál, fotky."},
+      ],
+      maintMoreTitle:"Služby",
+      maintMoreBullets:["Plány úklidu","Deep clean","Koordinace řemeslníků","Zahrada (vol.)","Foto před/po"],
+      pricingTitle:"Balíčky",
+      pricingDesc:"Měsíčně nebo ročně.",
+      pricingCards:[
+        {icon:"1", title:"Měsíčně", desc:"Reporty + koordinace.", tag:"Dlouhodobé"},
+        {icon:"2", title:"Full Hosting", desc:"Správa + úklid.", tag:"Krátkodobé"},
+        {icon:"3", title:"Ročně", desc:"Sleva + priorita.", tag:"Nejlepší"},
+      ],
+      contactTitle:"Kontakt",
+      contactDesc:"Napište, co potřebujete — odpovíme.",
+      contactCardSub:"Rychle • Jasně • Profesionálně",
+      emailBtn:"Email",
+      cEmailK:"Email", cPhoneK:"Telefon", cWhatsK:"WhatsApp", cAddrK:"Adresa",
+      fName:"Jméno", fEmail:"Email",
+      fMsg:"Co potřebujete? (hosting / úklid / údržba)",
+      sendBtn:"Odeslat",
+      footerRight:"Bydlení • Hosting • Úklid • Údržba",
+    },
+
+    sk: { /* compact */
+      siteTag:"Správa • Upratovanie • Údržba",
+      nav:{ home:"Domov", housing:"Bývanie", maintenance:"Údržba", pricing:"Balíky", contact:"Kontakt" },
+      quote:"Ponuka", services:"Služby", viewPackages:"Balíky",
+      heroPill:"Jeden tím pre hosting + údržbu",
+      heroTitle:"AB Solutions — Správa a údržba",
+      heroLead:"Rezervácie, hostia, reporty, upratovanie a opravy. Mesačná/ročná správa.",
+      kpi1:"24/7", kpi1Label:"Podpora", kpi2:"✔", kpi2Label:"Kontroly",
+      stat1:"Objekty", stat2:"Upratovania / rok", stat3:"Hodnotenie",
+      housingTitle:"Bývanie & Hosting",
+      housingDesc:"Airbnb, Booking, dlhodobé — kompletný servis.",
+      housingCta:"Dostupnosť",
+      housingMini:"Mesačne aj ročne.",
+      readMore:"Viac", readLess:"Menej",
+      housingCards:[
+        {icon:"AB", title:"Airbnb / Booking", desc:"Kalendár, ceny, komunikácia."},
+        {icon:"¥", title:"Administrácia", desc:"Reporty, faktúry, náklady."},
+        {icon:"★", title:"Optimalizácia", desc:"Fotky, texty, ceny, recenzie."},
+      ],
+      housingMoreTitle:"Zahŕňa",
+      housingMoreBullets:["Komunikácia s hosťami","Check-in/out","Dokumentácia","Koordinácia tímov","Rôzne typy objektov"],
+      maintTitle:"Údržba & Upratovanie",
+      maintDesc:"Upratovanie, kontroly, opravy a údržba.",
+      maintCta:"Objednať",
+      maintMini:"Rýchlo a spoľahlivo.",
+      maintCards:[
+        {icon:"✦", title:"Upratovanie", desc:"Štandard, deep clean, po hosťoch."},
+        {icon:"⚙", title:"Opravy", desc:"Drobné opravy, urgentné."},
+        {icon:"☑", title:"Kontroly", desc:"Inventár, materiál, fotky."},
+      ],
+      maintMoreTitle:"Služby",
+      maintMoreBullets:["Plány upratovania","Deep clean","Koordinácia remeselníkov","Záhrada (vol.)","Foto pred/po"],
+      pricingTitle:"Balíky",
+      pricingDesc:"Mesačne alebo ročne.",
+      pricingCards:[
+        {icon:"1", title:"Mesačne", desc:"Reporty + koordinácia.", tag:"Dlhodobo"},
+        {icon:"2", title:"Full Hosting", desc:"Správa + upratovanie.", tag:"Krátkodobo"},
+        {icon:"3", title:"Ročne", desc:"Zľava + priorita.", tag:"Najlepšie"},
+      ],
+      contactTitle:"Kontakt",
+      contactDesc:"Napíšte, čo potrebujete — odpovieme.",
+      contactCardSub:"Rýchlo • Jasne • Profesionálne",
+      emailBtn:"Email",
+      cEmailK:"Email", cPhoneK:"Telefón", cWhatsK:"WhatsApp", cAddrK:"Adresa",
+      fName:"Meno", fEmail:"Email",
+      fMsg:"Čo potrebujete? (hosting / upratovanie / údržba)",
+      sendBtn:"Odoslať",
+      footerRight:"Bývanie • Hosting • Upratovanie • Údržba",
+    },
+
+    it: { /* compact */
+      siteTag:"Gestione • Pulizia • Manutenzione",
+      nav:{ home:"Home", housing:"Immobili", maintenance:"Manutenzione", pricing:"Pacchetti", contact:"Contatti" },
+      quote:"Preventivo", services:"Servizi", viewPackages:"Pacchetti",
+      heroPill:"Un team per hosting + manutenzione",
+      heroTitle:"AB Solutions — Gestione e manutenzione",
+      heroLead:"Prenotazioni, ospiti, report, pulizie e riparazioni. Amministrazione mensile/annuale.",
+      kpi1:"24/7", kpi1Label:"Supporto", kpi2:"✔", kpi2Label:"Controlli",
+      stat1:"Immobili", stat2:"Pulizie / anno", stat3:"Valutazione",
+      housingTitle:"Gestione & Hosting",
+      housingDesc:"Airbnb, Booking, lungo termine — servizio completo.",
+      housingCta:"Disponibilità",
+      housingMini:"Mensile e annuale disponibili.",
+      readMore:"Altro", readLess:"Meno",
+      housingCards:[
+        {icon:"AB", title:"Airbnb / Booking", desc:"Calendario, prezzi, messaggi."},
+        {icon:"¥", title:"Amministrazione", desc:"Report, fatture, costi."},
+        {icon:"★", title:"Ottimizzazione", desc:"Foto, testi, prezzi, recensioni."},
+      ],
+      housingMoreTitle:"Include",
+      housingMoreBullets:["Comunicazione ospiti","Check-in/out","Documentazione","Coordinamento team","Vari tipi di immobili"],
+      maintTitle:"Manutenzione & Pulizia",
+      maintDesc:"Pulizie, controlli, riparazioni e manutenzione.",
+      maintCta:"Prenota",
+      maintMini:"Veloce e affidabile.",
+      maintCards:[
+        {icon:"✦", title:"Pulizia", desc:"Standard, deep clean, post-ospiti."},
+        {icon:"⚙", title:"Riparazioni", desc:"Piccole riparazioni, urgenze."},
+        {icon:"☑", title:"Controlli", desc:"Inventario, materiali, foto."},
+      ],
+      maintMoreTitle:"Servizi",
+      maintMoreBullets:["Piani pulizia","Deep cleaning","Coordinamento tecnici","Giardino (opz.)","Foto prima/dopo"],
+      pricingTitle:"Pacchetti",
+      pricingDesc:"Mensile o annuale.",
+      pricingCards:[
+        {icon:"1", title:"Mensile", desc:"Report + coordinamento.", tag:"Lungo termine"},
+        {icon:"2", title:"Full Hosting", desc:"Gestione + pulizia.", tag:"Short-stay"},
+        {icon:"3", title:"Annuale", desc:"Sconto + priorità.", tag:"Miglior valore"},
+      ],
+      contactTitle:"Contatti",
+      contactDesc:"Dicci cosa ti serve — rispondiamo.",
+      contactCardSub:"Veloce • Chiaro • Professionale",
+      emailBtn:"Email",
+      cEmailK:"Email", cPhoneK:"Telefono", cWhatsK:"WhatsApp", cAddrK:"Indirizzo",
+      fName:"Nome", fEmail:"Email",
+      fMsg:"Di cosa hai bisogno? (immobili / pulizia / manutenzione)",
+      sendBtn:"Invia",
+      footerRight:"Immobili • Hosting • Pulizia • Manutenzione",
+    },
+  };
+
+  const $ = (id) => document.getElementById(id);
+
+  function detectLang(){
+    const saved = localStorage.getItem(LS_KEY);
+    if(saved && i18n[saved]) return saved;
+    const n = (navigator.language || "en").toLowerCase().split("-")[0];
+    return i18n[n] ? n : "en";
+  }
+
+  function renderCards(gridEl, cards){
+    gridEl.innerHTML = cards.map(c => `
+      <div class="svc">
+        <div class="icon">${c.icon}</div>
+        <h3>${c.title}</h3>
+        <p>${c.desc}</p>
+      </div>
+    `).join("");
+  }
+
+  function renderMore(moreEl, title, bullets){
+    moreEl.innerHTML = `
+      <div style="font-weight:900; margin-top:10px;">${title}</div>
+      <ul>${bullets.map(b => `<li>${b}</li>`).join("")}</ul>
+    `;
+  }
+
+  function renderPricing(gridEl, cards){
+    gridEl.innerHTML = cards.map(c => `
+      <div class="svc">
+        <div class="icon">${c.icon}</div>
+        <h3>${c.title}</h3>
+        <p>${c.desc}</p>
+        <div style="margin-top:10px; font-size:12px; color:rgba(11,19,32,.62);
+                    border-top:1px solid rgba(10,20,30,.10); padding-top:10px; font-weight:700;">
+          ${c.tag}
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function applyLang(lang){
+    const t = i18n[lang];
+    document.documentElement.lang = lang;
+    localStorage.setItem(LS_KEY, lang);
+    $("langSelect").value = lang;
+
+    $("siteTag").textContent = t.siteTag;
+    document.querySelectorAll("nav a").forEach(a => a.textContent = t.nav[a.dataset.nav]);
+
+    document.querySelectorAll("[data-mnav]").forEach(a => a.textContent = t.nav[a.dataset.mnav]);
+
+    $("quoteBtn").textContent = t.quote;
+    $("quoteBtnMobile").textContent = t.quote;
+    $("servicesBtnMobile").textContent = t.services;
+
+    $("heroPill").textContent = t.heroPill;
+    $("heroTitle").textContent = t.heroTitle;
+    $("heroLead").textContent = t.heroLead;
+    $("heroCta1").textContent = t.quote;
+    $("heroCta2").textContent = t.services;
+    $("heroCta3").textContent = t.viewPackages;
+
+    $("kpi1").textContent = t.kpi1;
+    $("kpi1Label").textContent = t.kpi1Label;
+    $("kpi2").textContent = t.kpi2;
+    $("kpi2Label").textContent = t.kpi2Label;
+
+    $("stat1").textContent = t.stat1;
+    $("stat2").textContent = t.stat2;
+    $("stat3").textContent = t.stat3;
+
+    $("housingTitle").textContent = t.housingTitle;
+    $("housingDesc").textContent = t.housingDesc;
+    $("housingCta").textContent = t.housingCta;
+    $("housingMini").textContent = t.housingMini;
+    renderCards($("housingGrid"), t.housingCards);
+    renderMore($("housingMore"), t.housingMoreTitle, t.housingMoreBullets);
+
+    $("maintTitle").textContent = t.maintTitle;
+    $("maintDesc").textContent = t.maintDesc;
+    $("maintCta").textContent = t.maintCta;
+    $("maintMini").textContent = t.maintMini;
+    renderCards($("maintGrid"), t.maintCards);
+    renderMore($("maintMore"), t.maintMoreTitle, t.maintMoreBullets);
+
+    $("pricingTitle").textContent = t.pricingTitle;
+    $("pricingDesc").textContent = t.pricingDesc;
+    renderPricing($("pricingGrid"), t.pricingCards);
+
+    $("contactTitle").textContent = t.contactTitle;
+    $("contactDesc").textContent = t.contactDesc;
+    $("contactCardSub").textContent = t.contactCardSub;
+    $("emailBtn").textContent = t.emailBtn;
+
+    $("cEmailK").textContent = t.cEmailK;
+    $("cPhoneK").textContent = t.cPhoneK;
+    $("cWhatsK").textContent = t.cWhatsK;
+    $("cAddrK").textContent = t.cAddrK;
+
+    $("fName").placeholder = t.fName;
+    $("fEmail").placeholder = t.fEmail;
+    $("fMsg").placeholder = t.fMsg;
+    $("sendBtn").textContent = t.sendBtn;
+
+    $("footerRight").textContent = t.footerRight;
+
+    syncMoreButtons(lang);
+  }
+
+  function toggleMore(content){
+    const open = content.style.display === "block";
+    content.style.display = open ? "none" : "block";
+    return !open;
+  }
+
+  function syncMoreButtons(lang){
+    const t = i18n[lang];
+    const hOpen = $("housingMore").style.display === "block";
+    const mOpen = $("maintMore").style.display === "block";
+    $("housingMoreBtn").textContent = hOpen ? t.readLess : t.readMore;
+    $("maintMoreBtn").textContent = mOpen ? t.readLess : t.readMore;
+  }
+
+  // Reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add("in"); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  // Counters
+  function animateCounters(){
+    document.querySelectorAll("[data-counter]").forEach(el => {
+      const target = parseFloat(el.dataset.counter);
+      const isFloat = String(target).includes(".");
+      let cur = 0;
+      const steps = 38;
+      const inc = target / steps;
+      const tick = () => {
+        cur += inc;
+        if(cur >= target) cur = target;
+        el.textContent = isFloat ? cur.toFixed(1) : Math.round(cur).toString();
+        if(cur < target) requestAnimationFrame(tick);
+      };
+      tick();
+    });
+  }
+  setTimeout(animateCounters, 320);
+
+  // Active nav on scroll
+  const sections = ["home","housing","maintenance","pricing","contact"].map(id => document.getElementById(id));
+  const navSpy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        document.querySelectorAll("nav a").forEach(a => a.classList.toggle("active", a.getAttribute("href") === `#${e.target.id}`));
+      }
+    });
+  }, { threshold: 0.55 });
+  sections.forEach(s => navSpy.observe(s));
+
+  // Mobile menu toggle
+  const mobileMenu = $("mobileMenu");
+  const hamburger = $("hamburger");
+  function setMobileMenuVisibility(){
+    const isSmall = window.matchMedia("(max-width: 980px)").matches;
+    mobileMenu.style.display = isSmall ? "block" : "none";
+    if(!isSmall) mobileMenu.classList.remove("show");
+  }
+  setMobileMenuVisibility();
+  window.addEventListener("resize", setMobileMenuVisibility);
+
+  hamburger.addEventListener("click", () => mobileMenu.classList.toggle("show"));
+  document.querySelectorAll("[data-mnav]").forEach(a => a.addEventListener("click", () => mobileMenu.classList.remove("show")));
+
+  // Read more
+  $("housingMoreBtn").addEventListener("click", () => {
+    const open = toggleMore($("housingMore"));
+    syncMoreButtons($("langSelect").value);
+    if(open) $("housingMore").scrollIntoView({behavior:"smooth", block:"nearest"});
+  });
+  $("maintMoreBtn").addEventListener("click", () => {
+    const open = toggleMore($("maintMore"));
+    syncMoreButtons($("langSelect").value);
+    if(open) $("maintMore").scrollIntoView({behavior:"smooth", block:"nearest"});
+  });
+
+  // Language change
+  $("langSelect").addEventListener("change", (e) => applyLang(e.target.value));
+
+  // Contact form (mailto)
+  $("contactForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = $("fName").value.trim();
+    const email = $("fEmail").value.trim();
+    const msg = $("fMsg").value.trim();
+    const subject = encodeURIComponent("AB Solutions — New inquiry");
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}`);
+    window.location.href = `mailto:hello@absolutions.com?subject=${subject}&body=${body}`;
+  });
+
+  // Init
+  $("year").textContent = new Date().getFullYear();
+  applyLang(detectLang());
+</script>
+</body>
+</html>
