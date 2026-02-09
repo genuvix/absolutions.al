@@ -194,35 +194,32 @@ footer{
 <body>
 
 <header class="container">
-  <button class="backBtn" onclick="history.back()">← Go back</button>
+  <button class="backBtn" id="backBtn" onclick="history.back()">← Go back</button>
 </header>
 
 <main class="container">
-  <h1>Professional Cleaning Packages</h1>
-  <p class="lead">
+  <h1 id="pageTitle">Professional Cleaning Packages</h1>
+  <p class="lead" id="pageLead">
     Residential and commercial cleaning services tailored to your space and schedule.
   </p>
 
-  <!-- RESIDENTIAL -->
   <section class="section">
-    <h2>Residential Cleaning</h2>
-    <p>For apartments, houses and private properties.</p>
-    <div class="grid" id="residential"></div>
+    <h2 id="resTitle">Residential Cleaning</h2>
+    <p id="resDesc">For apartments, houses and private properties.</p>
+    <div class="grid" id="residentialGrid"></div>
   </section>
 
-  <!-- OFFICE -->
   <section class="section">
-    <h2>Office & Commercial Cleaning</h2>
-    <p>Professional cleaning for offices, shops and workspaces.</p>
-    <div class="grid" id="office"></div>
+    <h2 id="offTitle">Office & Commercial Cleaning</h2>
+    <p id="offDesc">Professional cleaning for offices, shops and workspaces.</p>
+    <div class="grid" id="officeGrid"></div>
   </section>
 
   <div class="ctaWrap">
-  <a href="contact-cleaning.html" class="ctaBtn">
-    🧽 Contact Us for Cleaning
-  </a>
-</div>
-
+    <a href="contact-cleaning.html" id="ctaBtn" class="ctaBtn">
+      🧽 Contact Us for Cleaning
+    </a>
+  </div>
 </main>
 
 <footer>
@@ -232,111 +229,174 @@ footer{
 <script>
 const lang = localStorage.getItem("absolutions:lang") || "en";
 
-const data = {
-  residential:[
-    {
-      icon:"🧼",
-      tag:"Standard",
-      title:"Standard Cleaning",
-      price:"€60 – €90",
-      desc:"Routine cleaning for well-maintained homes.",
-      bullets:[
-        "Dusting and wiping surfaces",
-        "Kitchen & bathroom cleaning",
-        "Vacuuming and mopping",
-        "Trash removal"
-      ]
-    },
-    {
-      icon:"✨",
-      tag:"Most Popular",
-      title:"Premium Cleaning",
-      price:"€120 – €160",
-      desc:"Deep and detailed cleaning for inspections or guests.",
-      bullets:[
-        "Deep clean of all rooms",
-        "Inside cabinets & appliances",
-        "Sanitizing kitchens & bathrooms",
-        "Before / after photo report"
-      ]
-    },
-    // {
-    //   icon:"🏠",
-    //   tag:"Move Service",
-    //   title:"Move In / Out",
-    //   price:"From €180",
-    //   desc:"Complete cleaning for property handovers.",
-    //   bullets:[
-    //     "Full deep clean",
-    //     "Windows & frames",
-    //     "Appliances inside/out",
-    //     "Ready for inspection"
-    //   ]
-    // }
-  ],
-  office:[
-    {
-      icon:"🏢",
-      tag:"Starter",
-      title:"Office Basic",
-      price:"From €150 / month",
-      desc:"Essential cleaning for small offices.",
-      bullets:[
-        "2–3 visits per week",
-        "Workstations & floors",
-        "Kitchen & restroom cleaning",
-        "Trash disposal"
-      ]
-    },
-    {
-      icon:"💼",
-      tag:"Recommended",
-      title:"Office Standard",
-      price:"From €250 / month",
-      desc:"Consistent professional cleaning for growing teams.",
-      bullets:[
-        "3–5 visits per week",
-        "Desks & shared equipment",
-        "Detailed restroom sanitation",
-        "Supply restocking"
-      ]
-    },
-    {
-      icon:"🏆",
-      tag:"Enterprise",
-      title:"Office Premium",
-      price:"Custom pricing",
-      desc:"High-level cleaning for large offices and businesses.",
-      bullets:[
-        "Daily or evening cleaning",
-        "Conference rooms & glass",
-        "On-call support",
-        "Dedicated supervisor"
-      ]
-    }
-  ]
+const i18n = {
+  en: {
+    back: "← Go back",
+    pageTitle: "Professional Cleaning Packages",
+    pageLead: "Residential and commercial cleaning services tailored to your space and schedule.",
+    resTitle: "Residential Cleaning",
+    resDesc: "For apartments, houses and private properties.",
+    offTitle: "Office & Commercial Cleaning",
+    offDesc: "Professional cleaning for offices, shops and workspaces.",
+    cta: "🧽 Contact Us for Cleaning",
+    residential: [
+      { icon: "🧼", tag: "Standard", title: "Standard Cleaning", price: "€60 – €90", desc: "Routine cleaning for well-maintained homes.", bullets: ["Dusting and wiping surfaces", "Kitchen & bathroom cleaning", "Vacuuming and mopping", "Trash removal"] },
+      { icon: "✨", tag: "Most Popular", title: "Premium Cleaning", price: "€120 – €160", desc: "Deep and detailed cleaning for inspections or guests.", bullets: ["Deep clean of all rooms", "Inside cabinets & appliances", "Sanitizing kitchens & bathrooms", "Before / after photo report"] }
+    ],
+    office: [
+      { icon: "🏢", tag: "Starter", title: "Office Basic", price: "From €150 / mo", desc: "Essential cleaning for small offices.", bullets: ["2–3 visits per week", "Workstations & floors", "Kitchen & restroom cleaning", "Trash disposal"] },
+      { icon: "💼", tag: "Recommended", title: "Office Standard", price: "From €250 / mo", desc: "Consistent professional cleaning for teams.", bullets: ["3–5 visits per week", "Desks & shared equipment", "Detailed restroom sanitation", "Supply restocking"] },
+      { icon: "🏆", tag: "Enterprise", title: "Office Premium", price: "Custom", desc: "High-level cleaning for large offices.", bullets: ["Daily or evening cleaning", "Conference rooms & glass", "On-call support", "Dedicated supervisor"] }
+    ]
+  },
+  sq: {
+    back: "← Pas",
+    pageTitle: "Paketat e Pastrimit Profesional",
+    pageLead: "Shërbime pastrimi rezidenciale dhe komerciale të përshtatura për hapësirën tuaj.",
+    resTitle: "Pastrim Rezidencial",
+    resDesc: "Për apartamente, shtëpi dhe prona private.",
+    offTitle: "Pastrim Zyra & Komercial",
+    offDesc: "Pastrim profesional për zyra, dyqane dhe vende pune.",
+    cta: "🧽 Na Kontaktoni për Pastrim",
+    residential: [
+      { icon: "🧼", tag: "Standard", title: "Pastrim Standard", price: "€60 – €90", desc: "Pastrim rutinë për shtëpi të mirëmbajtura.", bullets: ["Pluhurat dhe fshirja e sipërfaqeve", "Pastrimi i kuzhinës dhe tualetit", "Fshirja me korrent dhe larja", "Heqja e mbeturinave"] },
+      { icon: "✨", tag: "Më Popullorja", title: "Pastrim Premium", price: "€120 – €160", desc: "Pastrim i thellë për inspektime ose mysafirë.", bullets: ["Pastrim i thellë i të gjitha dhomave", "Brenda kabineteve & pajisjeve", "Dezinfektim kuzhine & tualeti", "Raport me foto para / pas"] }
+    ],
+    office: [
+      { icon: "🏢", tag: "Fillestare", title: "Zyra Bazë", price: "Nga €150 / muaj", desc: "Pastrim thelbësor për zyra të vogla.", bullets: ["2–3 vizita në javë", "Vendet e punës & dyshemetë", "Kuzhina & pastrimi i tualeteve", "Asgjësimi i mbeturinave"] },
+      { icon: "💼", tag: "E Rekomanduar", title: "Zyra Standard", price: "Nga €250 / muaj", desc: "Pastrim profesional i vazhdueshme për ekipe.", bullets: ["3–5 vizita në javë", "Tavolinat & pajisjet e përbashkëta", "Sanitizim i detajuar i tualeteve", "Rimbushja e furnizimeve"] },
+      { icon: "🏆", tag: "Enterprise", title: "Zyra Premium", price: "Me marrëveshje", desc: "Pastrim i nivelit të lartë për zyra të mëdha.", bullets: ["Pastrim ditor ose në mbrëmje", "Dhomat e konferencave & xhamat", "Mbështetje në gatishmëri", "Supervizor i dedikuar"] }
+    ]
+  },
+  de: {
+    back: "← Zurück",
+    pageTitle: "Professionelle Reinigungspakete",
+    pageLead: "Reinigungsdienste für Wohn- und Geschäftsräume, angepasst an Ihren Zeitplan.",
+    resTitle: "Wohnreinigung",
+    resDesc: "Für Wohnungen, Häuser und Privatimmobilien.",
+    offTitle: "Büro- & Geschäftsreinigung",
+    offDesc: "Professionelle Reinigung für Büros, Geschäfte und Arbeitsplätze.",
+    cta: "🧽 Kontaktieren Sie uns für Reinigung",
+    residential: [
+      { icon: "🧼", tag: "Standard", title: "Standardreinigung", price: "€60 – €90", desc: "Routine-Reinigung für gepflegte Häuser.", bullets: ["Staubwischen & Oberflächen", "Küche & Bad Reinigung", "Staubsaugen & Wischen", "Müllentsorgung"] },
+      { icon: "✨", tag: "Beliebteste", title: "Premiumreinigung", price: "€120 – €160", desc: "Tiefenreinigung für Abnahmen oder Gäste.", bullets: ["Tiefenreinigung aller Räume", "Schränke & Geräte innen", "Desinfektion Küche & Bad", "Vorher-/Nachher-Fotobericht"] }
+    ],
+    office: [
+      { icon: "🏢", tag: "Starter", title: "Büro Basic", price: "Ab €150 / Monat", desc: "Grundreinigung für kleine Büros.", bullets: ["2–3 Besuche pro Woche", "Arbeitsplätze & Böden", "Küche & Toilettenreinigung", "Abfallentsorgung"] },
+      { icon: "💼", tag: "Empfohlen", title: "Büro Standard", price: "Ab €250 / Monat", desc: "Konsequente Reinigung für wachsende Teams.", bullets: ["3–5 Besuche pro Woche", "Schreibtische & Geräte", "Detaillierte Sanitärreinigung", "Auffüllen von Vorräten"] },
+      { icon: "🏆", tag: "Enterprise", title: "Büro Premium", price: "Individuell", desc: "High-End-Reinigung für Großraumbüros.", bullets: ["Tägliche Reinigung", "Konferenzräume & Glas", "On-Call Support", "Eigener Supervisor"] }
+    ]
+  },
+  it: {
+    back: "← Indietro",
+    pageTitle: "Pacchetti Pulizia Professionale",
+    pageLead: "Servizi di pulizia residenziale e commerciale su misura per i tuoi spazi.",
+    resTitle: "Pulizia Residenziale",
+    resDesc: "Per appartamenti, case e proprietà private.",
+    offTitle: "Pulizia Uffici e Commerciale",
+    offDesc: "Pulizia professionale per uffici, negozi e spazi di lavoro.",
+    cta: "🧽 Contattaci per le Pulizie",
+    residential: [
+      { icon: "🧼", tag: "Standard", title: "Pulizia Standard", price: "€60 – €90", desc: "Pulizia di routine per case ben mantenute.", bullets: ["Spolvero e superfici", "Pulizia cucina e bagno", "Aspirapolvere e lavaggio", "Rimozione rifiuti"] },
+      { icon: "✨", tag: "Più Popolare", title: "Pulizia Premium", price: "€120 – €160", desc: "Pulizia profonda per ispezioni o ospiti.", bullets: ["Pulizia profonda stanze", "Interno armadi e mobili", "Sanificazione cucina e bagno", "Report fotografico prima/dopo"] }
+    ],
+    office: [
+      { icon: "🏢", tag: "Starter", title: "Ufficio Base", price: "Da €150 / mese", desc: "Pulizia essenziale per piccoli uffici.", bullets: ["2–3 visite a settimana", "Postazioni e pavimenti", "Pulizia cucina e bagni", "Smaltimento rifiuti"] },
+      { icon: "💼", tag: "Consigliato", title: "Ufficio Standard", price: "Da €250 / mese", desc: "Pulizia professionale costante per team.", bullets: ["3–5 visite a settimana", "Scrivanie e attrezzature", "Sanificazione bagni", "Rifornimento forniture"] },
+      { icon: "🏆", tag: "Enterprise", title: "Ufficio Premium", price: "Su misura", desc: "Pulizia di alto livello per grandi uffici.", bullets: ["Pulizia giornaliera", "Sale riunioni e vetrate", "Supporto su chiamata", "Supervisore dedicato"] }
+    ]
+  },
+  pl: {
+    back: "← Powrót",
+    pageTitle: "Profesjonalne Pakiety Sprzątania",
+    pageLead: "Usługi sprzątania domów i firm dostosowane do Twojego harmonogramu.",
+    resTitle: "Sprzątanie Domów",
+    resDesc: "Dla mieszkań, domów i posesji prywatnych.",
+    offTitle: "Sprzątanie Biur i Komercyjne",
+    offDesc: "Profesjonalne sprzątanie biur, sklepów i miejsc pracy.",
+    cta: "🧽 Skontaktuj się w sprawie sprzątania",
+    residential: [
+      { icon: "🧼", tag: "Standard", title: "Sprzątanie Standard", price: "€60 – €90", desc: "Rutynowe sprzątanie zadbanych domów.", bullets: ["Kurze i powierzchnie", "Sprzątanie kuchni i łazienki", "Odkurzanie i mopowanie", "Wyrzucanie śmieci"] },
+      { icon: "✨", tag: "Najpopularniejszy", title: "Sprzątanie Premium", price: "€120 – €160", desc: "Gruntowne sprzątanie dla gości lub po najmie.", bullets: ["Głębokie sprzątanie pokoi", "Wnętrza szafek i AGD", "Dezynfekcja kuchni i łazienki", "Raport zdjęciowy przed/po"] }
+    ],
+    office: [
+      { icon: "🏢", tag: "Starter", title: "Biuro Bazowe", price: "Od €150 / mies", desc: "Niezbędne sprzątanie małych biur.", bullets: ["2–3 wizyty w tygodniu", "Stanowiska pracy i podłogi", "Sprzątanie kuchni i toalet", "Utylizacja odpadów"] },
+      { icon: "💼", tag: "Polecane", title: "Biuro Standard", price: "Od €250 / mies", desc: "Stałe profesjonalne sprzątanie dla zespołów.", bullets: ["3–5 wizyt w tygodniu", "Biurka i sprzęty", "Szczegółowa dezynfekcja toalet", "Uzupełnianie zapasów"] },
+      { icon: "🏆", tag: "Enterprise", title: "Biuro Premium", price: "Wycena indywidualna", desc: "Sprzątanie premium dla dużych biur.", bullets: ["Sprzątanie codzienne", "Sale konferencyjne i szkło", "Wsparcie na telefon", "Dedykowany nadzorca"] }
+    ]
+  },
+  cs: {
+    back: "← Zpět",
+    pageTitle: "Profesionální úklidové balíčky",
+    pageLead: "Úklidové služby pro domácnosti a firmy přizpůsobené vašim potřebám.",
+    resTitle: "Úklid domácností",
+    resDesc: "Pro byty, domy a soukromé objekty.",
+    offTitle: "Úklid kanceláří a komerčních prostor",
+    offDesc: "Profesionální úklid kanceláří, obchodů a pracovišť.",
+    cta: "🧽 Kontaktujte nás ohledně úklidu",
+    residential: [
+      { icon: "🧼", tag: "Standard", title: "Standardní úklid", price: "€60 – €90", desc: "Běžný úklid pro udržované domácnosti.", bullets: ["Prach a otírání povrchů", "Úklid kuchyně a koupelny", "Vysávání a vytírání", "Vynášení odpadků"] },
+      { icon: "✨", tag: "Nejoblíbenější", title: "Prémiový úklid", price: "€120 – €160", desc: "Hloubkový úklid pro kontroly nebo hosty.", bullets: ["Hloubkové čištění pokojů", "Vnitřky skříněk a spotřebičů", "Dezinfekce kuchyně a koupelny", "Fotoreport před / po"] }
+    ],
+    office: [
+      { icon: "🏢", tag: "Základ", title: "Kancelář Basic", price: "Od €150 / měs", desc: "Základní úklid pro malé kanceláře.", bullets: ["2–3 návštěvy týdně", "Pracovní místa a podlahy", "Úklid kuchyňky a WC", "Likvidace odpadu"] },
+      { icon: "💼", tag: "Doporučeno", title: "Kancelář Standard", price: "Od €250 / měs", desc: "Pravidelný úklid pro týmy.", bullets: ["3–5 návštěv týdně", "Stoly a vybavení", "Detailní sanitace toalet", "Doplňování zásob"] },
+      { icon: "🏆", tag: "Enterprise", title: "Kancelář Premium", price: "Individuální", desc: "Úklid vysokého standardu pro velké firmy.", bullets: ["Denní nebo večerní úklid", "Zasedačky a skleněné plochy", "Podpora na zavolání", "Vlastní supervizor"] }
+    ]
+  },
+  sk: {
+    back: "← Späť",
+    pageTitle: "Profesionálne upratovacie balíky",
+    pageLead: "Upratovacie služby pre domácnosti a firmy prispôsobené vašim potrebám.",
+    resTitle: "Upratovanie domácností",
+    resDesc: "Pre byty, domy a súkromné objekty.",
+    offTitle: "Upratovanie kancelárií a komerčných priestorov",
+    offDesc: "Profesionálne upratovanie kancelárií, obchodov a pracovísk.",
+    cta: "🧽 Kontaktujte nás ohľadom upratovania",
+    residential: [
+      { icon: "🧼", tag: "Štandard", title: "Štandardné upratovanie", price: "€60 – €90", desc: "Bežné upratovanie pre udržiavané domácnosti.", bullets: ["Prach a povrchy", "Upratovanie kuchyne a kúpeľne", "Vysávanie a zmývanie", "Vynášanie smetí"] },
+      { icon: "✨", tag: "Najobľúbenejšie", title: "Prémiové upratovanie", price: "€120 – €160", desc: "Hĺbkové upratovanie pre hostí alebo kontroly.", bullets: ["Hĺbkové čistenie izieb", "Vnútro skriniek a spotrebičov", "Dezinfekcia kuchyne a kúpeľne", "Fotoreport pred / po"] }
+    ],
+    office: [
+      { icon: "🏢", tag: "Základ", title: "Kancelária Basic", price: "Od €150 / mes", desc: "Základné upratovanie pre malé kancelárie.", bullets: ["2–3 návštevy týždenne", "Pracovné miesta a podlahy", "Upratovanie kuchynky a WC", "Likvidácia odpadu"] },
+      { icon: "💼", tag: "Odporúčané", title: "Kancelária Standard", price: "Od €250 / mes", desc: "Pravidelné upratovanie pre tímy.", bullets: ["3–5 návštev týždenne", "Stoly a vybavenie", "Detailná sanitácia toaliet", "Dopĺňanie zásob"] },
+      { icon: "🏆", tag: "Enterprise", title: "Kancelária Premium", price: "Individuálne", desc: "Vysoký štandard pre veľké firmy.", bullets: ["Denné alebo večerné upratovanie", "Zasadačky a sklenené plochy", "Podpora na zavolanie", "Vlastný supervízor"] }
+    ]
+  }
 };
 
-function render(id, items){
+const content = i18n[lang] || i18n.en;
+
+// UI Updates
+document.getElementById("backBtn").innerText = content.back;
+document.getElementById("pageTitle").innerText = content.pageTitle;
+document.getElementById("pageLead").innerText = content.pageLead;
+document.getElementById("resTitle").innerText = content.resTitle;
+document.getElementById("resDesc").innerText = content.resDesc;
+document.getElementById("offTitle").innerText = content.offTitle;
+document.getElementById("offDesc").innerText = content.offDesc;
+document.getElementById("ctaBtn").innerText = content.cta;
+
+function renderGrid(id, items) {
   const el = document.getElementById(id);
-  items.forEach(p=>{
+  items.forEach(p => {
     el.innerHTML += `
       <div class="card">
         <div class="icon">${p.icon}</div>
         <h3>${p.title}</h3>
-<div class="priceRow">
-  <span class="price">${p.price}</span>
-  <span class="pill pill--inline">${p.tag}</span>
-</div>
+        <div class="priceRow">
+          <span class="price">${p.price}</span>
+          <span class="pill pill--inline">${p.tag}</span>
+        </div>
         <p>${p.desc}</p>
-        <ul>${p.bullets.map(b=>`<li>${b}</li>`).join("")}</ul>
+        <ul>${p.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
       </div>
     `;
   });
 }
 
-render("residential", data.residential);
-render("office", data.office);
+renderGrid("residentialGrid", content.residential);
+renderGrid("officeGrid", content.office);
 </script>
 
 </body>
