@@ -339,11 +339,46 @@
       box-shadow:0 10px 25px rgba(10,20,30,.05);
       overflow:hidden;
     }
-    .moreBar{
+    /* .moreBar{
       display:flex; align-items:center; justify-content:space-between; gap:12px;
       padding:12px 12px;
     }
-    .mini{color:var(--muted); font-size:13px}
+    .mini{color:var(--muted); font-size:13px} */
+    .moreBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.86);
+  box-shadow: 0 10px 25px rgba(10,20,30,.05);
+}
+
+.moreBar .mini {
+  color: var(--muted);
+  font-size: 13px;
+  flex: 1; /* allows the text to take remaining space */
+}
+
+.moreBar .btn.small {
+  padding: 10px 14px;
+  font-size: 13px;
+  border-radius: 12px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--blue), var(--mint));
+  color: #fff;
+  box-shadow: 0 6px 12px rgba(11,83,145,.16);
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.moreBar .btn.small:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(11,83,145,.25);
+}
+
     .moreContent{display:none; padding:0 12px 14px 12px}
     .moreContent ul{
       margin:10px 0 0 0; padding-left:18px;
@@ -408,6 +443,28 @@
       border-top:1px solid var(--border);
       background:rgba(255,255,255,.55);
     }
+
+    .iconWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* keeps icon left */
+  gap: 8px; /* spacing between icon and button */
+}
+
+.iconWrap .btn.small {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px 14px;
+  font-size: 12px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--blue), var(--mint));
+  color: #fff;
+  /* box-shadow: 0 6px 12px rgba(11,83,145,.16); */
+  border: 0px;
+}
+
 
     /* Reveal */
     .reveal{opacity:0; transform:translateY(10px); transition:.55s ease}
@@ -493,12 +550,22 @@
       <div class="card heroLeft reveal">
         <div class="pill" id="heroPill">Housing & Maintenance</div>
         <h1 id="heroTitle">AB Solutions</h1>
-        <p class="lead" id="heroLead">
-          Apartments, houses, offices, restaurants. We manage bookings, guests, reporting, cleaning, and repairs.
+        <p class="lead">
+          <span id="heroLead">
+          Apartments, houses, offices, restaurants, parks.
+          </span>
+          <br>
+          <span id="heroLead2">
+          We manage properties and bookings.
+          </span>
+          <br>
+          <span id="heroLead3">
+          We make professional cleaning, inspections and maintenance.
+          </span>
         </p>
         <br>
         <div class="heroCtas">
-          <a class="btn primary" href="#contact" id="heroCta1">Get a quote</a>
+          <a class="btn primary" href="#contact" id="heroCta1">Give us a call</a>
           <a class="btn" href="#housing" id="heroCta2">See services</a>
         </div>
       </div>
@@ -550,10 +617,11 @@
       <div class="grid reveal" id="housingGrid"></div>
 
       <div class="moreWrap reveal">
-        <div class="moreBar">
-          <div class="mini" id="housingMini">Monthly & yearly administration options available.</div>
-          <button class="btn" id="housingMoreBtn">Read more</button>
-        </div>
+<div class="moreBar">
+  <div class="mini" id="housingMini">Discover all housing services we offer.</div>
+  <a class="btn small primary" id="housingMoreBtn" href="housing-details.html">Learn more</a>
+</div>
+
         <div class="moreContent" id="housingMore"></div>
       </div>
     </div>
@@ -564,7 +632,7 @@
     <div class="container">
       <div class="sectionHead reveal">
         <div>
-          <h2 id="maintTitle">Cleaning & Inspections</h2>
+          <h2 id="maintTitle">Cleaning & Maintenance</h2>
           <p id="maintDesc">Professional cleaning, inspections, repairs, and ongoing maintenance for all property types.</p>
         </div>
         <a class="btn primary" href="#contact" id="maintCta">Book a service</a>
@@ -573,18 +641,18 @@
       <div class="grid reveal" id="maintGrid"></div>
 
       <div class="moreWrap reveal">
-        <div class="moreBar">
-          <div class="mini" id="maintMini">From deep cleans to handyman fixes — fast & reliable.</div>
-          <button class="btn" id="maintMoreBtn">Read more</button>
-        </div>
-        <div class="moreContent" id="maintMore"></div>
+        <!-- <div class="moreBar"> -->
+          <!-- <div class="mini" id="maintMini">From deep cleans to handyman fixes — fast & reliable.</div> -->
+          <!-- <button class="btn" id="maintMoreBtn">Read more</button> -->
+        <!-- </div> -->
+        <!-- <div class="moreContent" id="maintMore"></div> -->
       </div>
     </div>
   </section>
 
   <!-- PRICING (white section again) -->
-  <section class="section--white" id="pricing">
-    <div class="container">
+  <!-- <section class="section--white" id="pricing"> -->
+    <!-- <div class="container">
       <div class="sectionHead reveal">
         <div>
           <h2 id="pricingTitle">Packages</h2>
@@ -593,8 +661,8 @@
       </div>
 
       <div class="grid reveal" id="pricingGrid"></div>
-    </div>
-  </section>
+    </div> -->
+  <!-- </section> -->
 
   <!-- CONTACT (white section + map) -->
   <section class="section--white" id="contact">
@@ -625,7 +693,7 @@
                 Fast replies • Clear pricing • Professional team
               </div>
             </div>
-            <a class="btn primary" href="mailto:hello@absolutions.com" id="emailBtn">Email us</a>
+            <!-- <a class="btn primary" href="mailto:hello@absolutions.com" id="emailBtn">Email us</a> -->
           </div>
 
           <div class="contactItems">
@@ -660,7 +728,7 @@
   <footer>
     <div class="container" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
       <div id="footerLeft">© <span id="year"></span> AB Solutions. All rights reserved.</div>
-      <div id="footerRight">Housing • Hosting • Cleaning • Maintenance</div>
+      <div id="footerRight"></div>
     </div>
   </footer>
 </main>
@@ -678,7 +746,9 @@
 
       heroPill:"Housing & Maintenance",
       heroTitle:"AB Solutions",
-      heroLead:"Apartments, houses, offices, restaurants. We manage bookings, guests, reporting, cleaning, and repairs.",
+      heroLead:"Apartments, houses, offices, restaurants, parks.",
+      heroLead2:"We manage properties and bookings.",
+      heroLead3:"We make professional cleaning, inspections and maintenance.",
       kpi1:"✔", kpi1Label:"Housing",
       kpi2:"24/7", kpi2Label:"Cleaning & Maintenance",
       stat1:"Properties supported",
@@ -688,7 +758,7 @@
       housingTitle:"Housing",
       housingDesc:"Airbnb, Booking.com, long-term rentals — we handle everything from listings to reporting.",
       housingCta:"Ask for availability",
-      housingMini:"Monthly & yearly administration options available.",
+      housingMini:"Discover all housing services we offer.",
       readMore:"Read more",
       readLess:"Read less",
 
@@ -741,6 +811,7 @@
       fMsg:"What do you need? (housing / cleaning / maintenance)",
       sendBtn:"Send message",
       footerRight:"Housing • Hosting • Cleaning • Maintenance",
+      moreCardBtn: "More",
     },
 
     /* Same languages as before (short, clean). */
@@ -1194,13 +1265,18 @@ it: {
   }
 
   function renderCards(gridEl, cards){
-    gridEl.innerHTML = cards.map(c => `
-      <div class="svc">
-        <div class="icon">${c.icon}</div>
-        <h3>${c.title}</h3>
-        <p>${c.desc}</p>
-      </div>
-    `).join("");
+gridEl.innerHTML = cards.map(c => `
+  <div class="svc">
+    <div class="iconWrap">
+      <div class="icon">${c.icon}</div>
+      ${c.icon === "✦" ? `<a class="btn small" href="cleaning-details.html" id="more-card-btn">More</a>` : ""}
+    </div>
+    <h3>${c.title}</h3>
+    <p>${c.desc}</p>
+  </div>
+`).join("");
+
+
   }
 
   function renderMore(moreEl, title, bullets){
@@ -1242,6 +1318,8 @@ it: {
     $("heroPill").textContent = t.heroPill;
     $("heroTitle").textContent = t.heroTitle;
     $("heroLead").textContent = t.heroLead;
+    $("heroLead2").textContent = t.heroLead2;
+    $("heroLead3").textContent = t.heroLead3;
     $("heroCta1").textContent = t.quote;
     $("heroCta2").textContent = t.services;
 
@@ -1259,23 +1337,23 @@ it: {
     $("housingCta").textContent = t.housingCta;
     $("housingMini").textContent = t.housingMini;
     renderCards($("housingGrid"), t.housingCards);
-    renderMore($("housingMore"), t.housingMoreTitle, t.housingMoreBullets);
+    // renderMore($("housingMore"), t.housingMoreTitle, t.housingMoreBullets);
 
     $("maintTitle").textContent = t.maintTitle;
     $("maintDesc").textContent = t.maintDesc;
     $("maintCta").textContent = t.maintCta;
-    $("maintMini").textContent = t.maintMini;
+    // $("maintMini").textContent = t.maintMini;
     renderCards($("maintGrid"), t.maintCards);
-    renderMore($("maintMore"), t.maintMoreTitle, t.maintMoreBullets);
+    // renderMore($("maintMore"), t.maintMoreTitle, t.maintMoreBullets);
 
-    $("pricingTitle").textContent = t.pricingTitle;
-    $("pricingDesc").textContent = t.pricingDesc;
-    renderPricing($("pricingGrid"), t.pricingCards);
+    // $("pricingTitle").textContent = t.pricingTitle;
+    // $("pricingDesc").textContent = t.pricingDesc;
+    // renderPricing($("pricingGrid"), t.pricingCards);
 
     $("contactTitle").textContent = t.contactTitle;
     $("contactDesc").textContent = t.contactDesc;
     $("contactCardSub").textContent = t.contactCardSub;
-    $("emailBtn").textContent = t.emailBtn;
+    // $("emailBtn").textContent = t.emailBtn;
 
     $("cEmailK").textContent = t.cEmailK;
     $("cPhoneK").textContent = t.cPhoneK;
@@ -1289,6 +1367,8 @@ it: {
 
     $("footerRight").textContent = t.footerRight;
 
+    $("more-card-btn").textContent = t.moreCardBtn;
+
     syncMoreButtons(lang);
   }
 
@@ -1301,9 +1381,9 @@ it: {
   function syncMoreButtons(lang){
     const t = i18n[lang];
     const hOpen = $("housingMore").style.display === "block";
-    const mOpen = $("maintMore").style.display === "block";
+    // const mOpen = $("maintMore").style.display === "block";
     $("housingMoreBtn").textContent = hOpen ? t.readLess : t.readMore;
-    $("maintMoreBtn").textContent = mOpen ? t.readLess : t.readMore;
+    // $("maintMoreBtn").textContent = mOpen ? t.readLess : t.readMore;
   }
 
   // Reveal
@@ -1332,7 +1412,7 @@ it: {
   setTimeout(animateCounters, 320);
 
   // Active nav on scroll
-  const sections = ["home","housing","maintenance","pricing","contact"].map(id => document.getElementById(id));
+  const sections = ["home","housing","maintenance","contact"].map(id => document.getElementById(id));
   const navSpy = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if(e.isIntersecting){
@@ -1365,16 +1445,16 @@ function setMobileMenuVisibility(){
   document.querySelectorAll("[data-mnav]").forEach(a => a.addEventListener("click", () => mobileMenu.classList.remove("show")));
 
   // Read more
-  $("housingMoreBtn").addEventListener("click", () => {
-    const open = toggleMore($("housingMore"));
-    syncMoreButtons($("langSelect").value);
-    if(open) $("housingMore").scrollIntoView({behavior:"smooth", block:"nearest"});
-  });
-  $("maintMoreBtn").addEventListener("click", () => {
-    const open = toggleMore($("maintMore"));
-    syncMoreButtons($("langSelect").value);
-    if(open) $("maintMore").scrollIntoView({behavior:"smooth", block:"nearest"});
-  });
+  // $("housingMoreBtn").addEventListener("click", () => {
+  //   const open = toggleMore($("housingMore"));
+  //   syncMoreButtons($("langSelect").value);
+  //   if(open) $("housingMore").scrollIntoView({behavior:"smooth", block:"nearest"});
+  // });
+  // $("maintMoreBtn").addEventListener("click", () => {
+  //   const open = toggleMore($("maintMore"));
+  //   syncMoreButtons($("langSelect").value);
+  //   if(open) $("maintMore").scrollIntoView({behavior:"smooth", block:"nearest"});
+  // });
 
   // Language change
   $("langSelect").addEventListener("change", (e) => applyLang(e.target.value));

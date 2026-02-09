@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Professional Cleaning</title>
+
+<style>
+:root{
+  --blue:#0B5391;
+  --mint:#55D3C1;
+  --bg:#f6f8fb;
+  --white:#ffffff;
+  --text:#0b1320;
+  --muted:rgba(11,19,32,.64);
+  --border:rgba(10,20,30,.12);
+  --shadow:0 18px 60px rgba(10,20,30,.12);
+  --radius:18px;
+  --max:1120px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(1000px 600px at 10% 0%, rgba(85,211,193,.22), transparent 55%),
+    radial-gradient(900px 600px at 90% 10%, rgba(11,83,145,.18), transparent 55%),
+    linear-gradient(180deg,#fff,var(--bg),#fff);
+}
+
+.container{
+  width:min(var(--max), calc(100% - 40px));
+  margin:0 auto;
+}
+
+header{padding:18px 0}
+
+.backBtn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.9);
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 10px 22px rgba(10,20,30,.08);
+}
+.backBtn:hover{transform:translateY(-1px)}
+
+h1{
+  font-size:40px;
+  margin:12px 0 6px 0;
+  letter-spacing:-.6px;
+}
+.lead{color:var(--muted);max-width:70ch}
+
+.section{
+  margin-top:36px;
+}
+
+.section h2{
+  font-size:28px;
+  margin-bottom:6px;
+}
+.section p{
+  color:var(--muted);
+  margin-top:0;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-top:18px;
+}
+
+.card{
+  position:relative;
+  padding:18px;
+  border-radius:var(--radius);
+  border:1px solid rgba(11,83,145,.18);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.88)),
+    radial-gradient(400px 160px at 0% 0%, rgba(85,211,193,.25), transparent 60%);
+  box-shadow:var(--shadow);
+  transition:.2s ease;
+}
+.card:hover{transform:translateY(-4px)}
+
+.icon{
+  width:46px;height:46px;border-radius:14px;
+  display:grid;place-items:center;
+  font-weight:900;color:#fff;
+  background:linear-gradient(135deg,var(--blue),var(--mint));
+  box-shadow:0 14px 30px rgba(11,83,145,.35);
+  margin-bottom:10px;
+}
+
+.pill{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:10px;
+  background:linear-gradient(135deg, rgba(11,83,145,.18), rgba(85,211,193,.25));
+  border:1px solid rgba(11,83,145,.25);
+}
+
+.price{
+  display:inline-block;
+  margin:10px 0;
+  padding:6px 14px;
+  border-radius:999px;
+  font-weight:900;
+  font-size:13px;
+  color:#fff;
+  background:linear-gradient(135deg,var(--blue),var(--mint));
+  box-shadow:0 10px 22px rgba(11,83,145,.28);
+}
+.priceRow{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:10px 0;
+}
+
+.pill--inline{
+  margin:0;
+  padding:6px 10px;
+  font-size:11px;
+  background:linear-gradient(
+    135deg,
+    rgba(11,83,145,.18),
+    rgba(85,211,193,.22)
+  );
+  border:1px solid rgba(11,83,145,.25);
+}
+
+
+.card h3{margin:6px 0}
+.card p{margin:0 0 8px 0;color:var(--muted);font-size:14px}
+.card ul{padding-left:18px;margin:8px 0 0 0;font-size:13px;line-height:1.6}
+
+footer{
+  padding:26px 0;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.ctaWrap{
+  margin:50px 0 10px;
+  display:flex;
+  justify-content:center;
+}
+
+.ctaBtn{
+  width:100%;
+  max-width:420px;
+  text-align:center;
+  padding:16px 22px;
+  border-radius:16px;
+  font-size:16px;
+  font-weight:900;
+  text-decoration:none;
+  color:#fff;
+  background:linear-gradient(135deg, var(--blue), var(--mint));
+  box-shadow:0 20px 40px rgba(11,83,145,.35);
+  transition:.2s ease;
+}
+
+.ctaBtn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 26px 55px rgba(11,83,145,.45);
+}
+
+.ctaBtn:active{
+  transform:translateY(0);
+}
+
+
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header class="container">
+  <button class="backBtn" onclick="history.back()">← Go back</button>
+</header>
+
+<main class="container">
+  <h1>Professional Cleaning Packages</h1>
+  <p class="lead">
+    Residential and commercial cleaning services tailored to your space and schedule.
+  </p>
+
+  <!-- RESIDENTIAL -->
+  <section class="section">
+    <h2>Residential Cleaning</h2>
+    <p>For apartments, houses and private properties.</p>
+    <div class="grid" id="residential"></div>
+  </section>
+
+  <!-- OFFICE -->
+  <section class="section">
+    <h2>Office & Commercial Cleaning</h2>
+    <p>Professional cleaning for offices, shops and workspaces.</p>
+    <div class="grid" id="office"></div>
+  </section>
+
+  <div class="ctaWrap">
+  <a href="contact-cleaning.html" class="ctaBtn">
+    🧽 Contact Us for Cleaning
+  </a>
+</div>
+
+</main>
+
+<footer>
+  © AB Solutions
+</footer>
+
+<script>
+const lang = localStorage.getItem("absolutions:lang") || "en";
+
+const data = {
+  residential:[
+    {
+      icon:"🧼",
+      tag:"Standard",
+      title:"Standard Cleaning",
+      price:"€60 – €90",
+      desc:"Routine cleaning for well-maintained homes.",
+      bullets:[
+        "Dusting and wiping surfaces",
+        "Kitchen & bathroom cleaning",
+        "Vacuuming and mopping",
+        "Trash removal"
+      ]
+    },
+    {
+      icon:"✨",
+      tag:"Most Popular",
+      title:"Premium Cleaning",
+      price:"€120 – €160",
+      desc:"Deep and detailed cleaning for inspections or guests.",
+      bullets:[
+        "Deep clean of all rooms",
+        "Inside cabinets & appliances",
+        "Sanitizing kitchens & bathrooms",
+        "Before / after photo report"
+      ]
+    },
+    // {
+    //   icon:"🏠",
+    //   tag:"Move Service",
+    //   title:"Move In / Out",
+    //   price:"From €180",
+    //   desc:"Complete cleaning for property handovers.",
+    //   bullets:[
+    //     "Full deep clean",
+    //     "Windows & frames",
+    //     "Appliances inside/out",
+    //     "Ready for inspection"
+    //   ]
+    // }
+  ],
+  office:[
+    {
+      icon:"🏢",
+      tag:"Starter",
+      title:"Office Basic",
+      price:"From €150 / month",
+      desc:"Essential cleaning for small offices.",
+      bullets:[
+        "2–3 visits per week",
+        "Workstations & floors",
+        "Kitchen & restroom cleaning",
+        "Trash disposal"
+      ]
+    },
+    {
+      icon:"💼",
+      tag:"Recommended",
+      title:"Office Standard",
+      price:"From €250 / month",
+      desc:"Consistent professional cleaning for growing teams.",
+      bullets:[
+        "3–5 visits per week",
+        "Desks & shared equipment",
+        "Detailed restroom sanitation",
+        "Supply restocking"
+      ]
+    },
+    {
+      icon:"🏆",
+      tag:"Enterprise",
+      title:"Office Premium",
+      price:"Custom pricing",
+      desc:"High-level cleaning for large offices and businesses.",
+      bullets:[
+        "Daily or evening cleaning",
+        "Conference rooms & glass",
+        "On-call support",
+        "Dedicated supervisor"
+      ]
+    }
+  ]
+};
+
+function render(id, items){
+  const el = document.getElementById(id);
+  items.forEach(p=>{
+    el.innerHTML += `
+      <div class="card">
+        <div class="icon">${p.icon}</div>
+        <h3>${p.title}</h3>
+<div class="priceRow">
+  <span class="price">${p.price}</span>
+  <span class="pill pill--inline">${p.tag}</span>
+</div>
+        <p>${p.desc}</p>
+        <ul>${p.bullets.map(b=>`<li>${b}</li>`).join("")}</ul>
+      </div>
+    `;
+  });
+}
+
+render("residential", data.residential);
+render("office", data.office);
+</script>
+
+</body>
+</html>
