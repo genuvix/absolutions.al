@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Contact Cleaning</title>
- <img src="images/favicon.ico" alt="AB Solutions logo" />
+<title>Contact Housing</title>
+<img src="images/favicon.ico" alt="AB Solutions logo" />
 
 <style>
 :root{
@@ -97,7 +97,7 @@ label{
   font-weight:700;
 }
 
-input, textarea, select{
+input, textarea{
   width:100%;
   padding:13px 14px;
   border-radius:14px;
@@ -109,18 +109,6 @@ input, textarea, select{
 textarea{
   min-height:120px;
   resize:vertical;
-}
-
-select{
-  appearance:none;
-  background-image:
-    linear-gradient(45deg, transparent 50%, var(--muted) 50%),
-    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
-  background-position:
-    calc(100% - 18px) calc(1em + 4px),
-    calc(100% - 13px) calc(1em + 4px);
-  background-size:5px 5px;
-  background-repeat:no-repeat;
 }
 
 /* Submit */
@@ -145,7 +133,7 @@ select{
 <div class="container">
 
   <div class="topActions">
-<a href="tel:+355696077737" class="callBtn" data-i18n="call">
+    <a href="tel:+355696077737" class="callBtn" data-i18n="call">
       📞 Call Us (+355 69 607 7737)
     </a>
     <br>
@@ -155,32 +143,20 @@ select{
   </div>
 
   <div class="card">
-    <h1 data-i18n="title">Cleaning Service Request</h1>
+    <h1 data-i18n="title">Housing Service Request</h1>
     <p class="lead" data-i18n="lead">
-      Request a professional cleaning service. Selecting a package is optional.
+      Contact us for professional housing services. Tell us about your property and your needs.
     </p>
 
     <form>
       <div>
-        <label data-i18n="package">Cleaning Package (optional)</label>
-        <select>
-          <option value="" data-i18n="none">No package selected</option>
-          <option>Standard Cleaning</option>
-          <option>Premium Cleaning</option>
-          <option>Office Basic</option>
-          <option>Office Standard</option>
-          <option>Office Premium</option>
-        </select>
-      </div>
-
-      <div>
         <label data-i18n="subject">Title</label>
-        <input type="text" placeholder="e.g. Apartment cleaning request">
+        <input type="text" placeholder="e.g. Airbnb property assistance">
       </div>
 
       <div>
         <label data-i18n="message">Message</label>
-        <textarea placeholder="Tell us about your space, size, and preferred time…"></textarea>
+        <textarea placeholder="Describe your property, number of units, or hosting needs…"></textarea>
       </div>
 
       <div>
@@ -189,7 +165,7 @@ select{
       </div>
 
       <button class="submitBtn" type="submit" data-i18n="send">
-        🧼 Send Request
+        🏠 Send Request
       </button>
     </form>
   </div>
@@ -202,14 +178,12 @@ const t = {
   en:{
     call:"📞 Call Us (+355 69 607 7737)",
     back:"← Go back",
-    title:"Cleaning Service Request",
-    lead:"Request a professional cleaning service. Selecting a package is optional.",
-    package:"Cleaning Package (optional)",
-    none:"No package selected",
+    title:"Housing Service Request",
+    lead:"Contact us for professional housing services. Tell us about your property and your needs.",
     subject:"Title",
     message:"Message",
     email:"Email",
-    send:"🧼 Send Request"
+    send:"🏠 Send Request"
   }
 };
 

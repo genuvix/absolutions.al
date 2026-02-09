@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Housing</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+<style>
+:root{
+  --blue:#0B5391;
+  --mint:#55D3C1;
+  --bg:#f6f8fb;
+  --white:#ffffff;
+  --text:#0b1320;
+  --muted:rgba(11,19,32,.64);
+  --border:rgba(10,20,30,.12);
+  --shadow:0 18px 60px rgba(10,20,30,.12);
+  --shadow2:0 10px 30px rgba(10,20,30,.08);
+  --radius:18px;
+  --max:1120px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(1000px 600px at 10% 0%, rgba(85,211,193,.22), transparent 55%),
+    radial-gradient(900px 600px at 90% 10%, rgba(11,83,145,.18), transparent 55%),
+    linear-gradient(180deg,#fff,var(--bg),#fff);
+}
+
+.container{width:min(var(--max), calc(100% - 40px)); margin:0 auto; padding:20px;}
+
+.backBtn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.9);
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 10px 22px rgba(10,20,30,.08);
+  margin-bottom:20px;
+}
+.backBtn:hover{transform:translateY(-1px)}
+
+h1{font-size:40px;margin:12px 0 6px 0;letter-spacing:-.6px;}
+.lead{color:var(--muted);max-width:70ch;margin-bottom:24px;}
+
+.carousel{
+  display:flex;
+  overflow-x:auto;
+  gap:12px;
+  padding-bottom:12px;
+  margin-bottom:36px;
+}
+.carousel img{
+  border-radius:18px;
+  min-width:280px;
+  height:180px;
+  object-fit:cover;
+  flex-shrink:0;
+  box-shadow:var(--shadow2);
+}
+
+.section{margin-bottom:36px;}
+.section h2{font-size:28px;margin-bottom:8px;}
+.section p{color:var(--muted);margin:0 0 18px 0;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;}
+
+.card{
+  position:relative;
+  padding:18px;
+  border-radius:var(--radius);
+  border:1px solid rgba(11,83,145,.18);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.88)),
+    radial-gradient(400px 160px at 0% 0%, rgba(85,211,193,.25), transparent 60%);
+  box-shadow:var(--shadow);
+  transition:.2s ease;
+}
+.card:hover{transform:translateY(-4px)}
+.icon{
+  width:46px;height:46px;border-radius:14px;
+  display:grid;place-items:center;
+  font-weight:900;color:#fff;
+  background:linear-gradient(135deg,var(--blue),var(--mint));
+  box-shadow:0 14px 30px rgba(11,83,145,.35);
+  margin-bottom:10px;font-size:20px;
+}
+
+.pill{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:10px;
+  background:linear-gradient(135deg, rgba(11,83,145,.18), rgba(85,211,193,.25));
+  border:1px solid rgba(11,83,145,.25);
+}
+
+.priceRow{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:10px 0;
+}
+
+.pill--inline{
+  margin:0;
+  padding:6px 10px;
+  font-size:11px;
+  background:linear-gradient(135deg, rgba(11,83,145,.18), rgba(85,211,193,.22));
+  border:1px solid rgba(11,83,145,.25);
+}
+
+.card h3{margin:6px 0;}
+.card p{margin:0 0 8px 0;color:var(--muted);font-size:14px}
+.card ul{padding-left:18px;margin:8px 0 0 0;font-size:13px;line-height:1.6}
+
+.ctaWrap{
+  margin:40px 0 20px;
+  display:flex;
+  justify-content:center;
+}
+
+.ctaBtn{
+  width:100%;
+  max-width:420px;
+  text-align:center;
+  padding:16px 22px;
+  border-radius:16px;
+  font-size:16px;
+  font-weight:900;
+  text-decoration:none;
+  color:#fff;
+  background:linear-gradient(135deg, var(--blue), var(--mint));
+  box-shadow:0 20px 40px rgba(11,83,145,.35);
+  transition:.2s ease;
+}
+.ctaBtn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 26px 55px rgba(11,83,145,.45);
+}
+
+footer{
+  padding:26px 0;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <button class="backBtn" onclick="history.back()">← Go back</button>
+
+  <h1>Housing & Hosting Services</h1>
+  <p class="lead">We take care of your property from A to Z. Airbnb, Booking.com, or long-term rentals — we manage listings, guests, pricing, and reporting. Our goal is to maximize occupancy, minimize hassle, and ensure a seamless hosting experience for property owners.</p>
+
+  <!-- Image carousel -->
+  <div class="carousel">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=70" alt="Housing image 1">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=70" alt="Housing image 1">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=70" alt="Housing image 1">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=70" alt="Housing image 1">
+  </div>
+
+  <!-- Services Section -->
+  <section class="section">
+    <h2>Our Services</h2>
+    <p>Comprehensive solutions for property owners, whether you manage a single apartment or multiple rentals.</p>
+    <div class="grid" id="servicesGrid"></div>
+  </section>
+
+  <!-- Contact CTA -->
+  <div class="ctaWrap">
+    <a href="contact-housing.html" class="ctaBtn">🏠 Contact Us for Housing</a>
+  </div>
+</div>
+
+<footer>
+  © AB Solutions
+</footer>
+
+<script>
+const lang = localStorage.getItem("absolutions:lang") || "en";
+
+const services = [
+  {
+    icon:"AB",
+    title:"Airbnb / Booking Management",
+    tag:"Full Service",
+    desc:"We handle calendar sync, pricing optimization, guest communication, check-in/out coordination, and ensure guests have a smooth experience from booking to departure.",
+    bullets:[
+      "Calendar and availability management",
+      "Dynamic pricing & occupancy maximization",
+      "Guest messaging and support",
+      "Check-in/out coordination"
+    ]
+  },
+  {
+    icon:"¥",
+    title:"Monthly / Yearly Administration",
+    tag:"Transparent",
+    desc:"Detailed monthly or yearly reports with invoices, occupancy rates, and cost tracking. Perfect for property owners who want clear, organized, and transparent oversight of their assets.",
+    bullets:[
+      "Monthly / yearly reporting",
+      "Invoice and document management",
+      "Occupancy & revenue tracking",
+      "Coordination with cleaning and maintenance teams"
+    ]
+  },
+  {
+    icon:"★",
+    title:"Listing & Optimization",
+    tag:"Enhanced",
+    desc:"We improve your property listings to attract more bookings and better reviews. This includes photography, descriptions, pricing strategies, and review management to increase visibility and profitability.",
+    bullets:[
+      "Professional photos and videos",
+      "Compelling descriptions",
+      "Pricing strategy & optimization",
+      "Review monitoring & improvement"
+    ]
+  }
+];
+
+const grid = document.getElementById("servicesGrid");
+services.forEach(s=>{
+  grid.innerHTML += `
+    <div class="card">
+      <div class="icon">${s.icon}</div>
+      <h3>${s.title}</h3>
+      <div class="priceRow">
+        <span class="pill pill--inline">${s.tag}</span>
+      </div>
+      <p>${s.desc}</p>
+      <ul>${s.bullets.map(b=>`<li>${b}</li>`).join("")}</ul>
+    </div>
+  `;
+});
+</script>
+</body>
+</html>
