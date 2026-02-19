@@ -46,6 +46,9 @@ body{
   cursor:pointer;
   box-shadow:0 10px 22px rgba(10,20,30,.08);
   margin-bottom:20px;
+  text-decoration: none;
+  color: inherit;
+  font-size: 14px;
 }
 .backBtn:hover{transform:translateY(-1px)}
 
@@ -58,6 +61,7 @@ h1{font-size:40px;margin:12px 0 6px 0;letter-spacing:-.6px;}
   gap:12px;
   padding-bottom:12px;
   margin-bottom:36px;
+  scrollbar-width: thin;
 }
 .carousel img{
   border-radius:18px;
@@ -71,11 +75,11 @@ h1{font-size:40px;margin:12px 0 6px 0;letter-spacing:-.6px;}
 .section{margin-bottom:36px;}
 .section h2{font-size:28px;margin-bottom:8px;}
 .section p{color:var(--muted);margin:0 0 18px 0;}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;}
 
 .card{
   position:relative;
-  padding:18px;
+  padding:24px;
   border-radius:var(--radius);
   border:1px solid rgba(11,83,145,.18);
   background:
@@ -83,15 +87,17 @@ h1{font-size:40px;margin:12px 0 6px 0;letter-spacing:-.6px;}
     radial-gradient(400px 160px at 0% 0%, rgba(85,211,193,.25), transparent 60%);
   box-shadow:var(--shadow);
   transition:.2s ease;
+  display: flex;
+  flex-direction: column;
 }
 .card:hover{transform:translateY(-4px)}
 .icon{
-  width:46px;height:46px;border-radius:14px;
+  width:50px;height:50px;border-radius:14px;
   display:grid;place-items:center;
   font-weight:900;color:#fff;
   background:linear-gradient(135deg,var(--blue),var(--mint));
   box-shadow:0 14px 30px rgba(11,83,145,.35);
-  margin-bottom:10px;font-size:20px;
+  margin-bottom:15px;font-size:20px;
 }
 
 .pill{
@@ -105,13 +111,6 @@ h1{font-size:40px;margin:12px 0 6px 0;letter-spacing:-.6px;}
   border:1px solid rgba(11,83,145,.25);
 }
 
-.priceRow{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  margin:10px 0;
-}
-
 .pill--inline{
   margin:0;
   padding:6px 10px;
@@ -120,9 +119,9 @@ h1{font-size:40px;margin:12px 0 6px 0;letter-spacing:-.6px;}
   border:1px solid rgba(11,83,145,.25);
 }
 
-.card h3{margin:6px 0;}
-.card p{margin:0 0 8px 0;color:var(--muted);font-size:14px}
-.card ul{padding-left:18px;margin:8px 0 0 0;font-size:13px;line-height:1.6}
+.card h3{margin:6px 0; font-size: 20px;}
+.card p{margin:0 0 12px 0;color:var(--muted);font-size:14px; line-height: 1.5;}
+.card ul{padding-left:18px;margin:8px 0 0 0;font-size:14px;line-height:1.7; flex-grow: 1;}
 
 .ctaWrap{
   margin:40px 0 20px;
@@ -159,10 +158,10 @@ footer{
 </head>
 <body>
 <div class="container">
-  <button class="backBtn" id="backBtn" onclick="history.back()">← Go back</button>
+  <a href="#" class="backBtn" id="backBtn" onclick="history.back(); return false;">← Go back</a>
 
   <h1 id="pageTitle">Housing & Hosting Services</h1>
-  <p class="lead" id="pageLead">We take care of your property from A to Z...</p>
+  <p class="lead" id="pageLead">Professional property management and guest services.</p>
 
   <div class="carousel">
     <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=70" alt="Housing">
@@ -172,8 +171,8 @@ footer{
   </div>
 
   <section class="section">
-    <h2 id="sectionTitle">Our Services</h2>
-    <p id="sectionDesc">Comprehensive solutions for property owners...</p>
+    <h2 id="sectionTitle">Our Packages</h2>
+    <p id="sectionDesc">Select the management level that fits your needs.</p>
     <div class="grid" id="servicesGrid"></div>
   </section>
 
@@ -187,201 +186,107 @@ footer{
 </footer>
 
 <script>
-// 1. Get current language
-const lang = localStorage.getItem("absolutions:lang") || "en";
+const lang = localStorage.getItem("absolutions:lang") || "sq";
 
-// 2. Translation Object
 const i18n = {
   en: {
     back: "← Go back",
     title: "Housing & Hosting Services",
-    lead: "We take care of your property from A to Z. Airbnb, Booking.com, or long-term rentals — we manage listings, guests, pricing, and reporting.",
-    sectionTitle: "Our Services",
-    sectionDesc: "Comprehensive solutions for property owners, whether you manage a single apartment or multiple rentals.",
+    lead: "We take care of your property from A to Z. Whether it's rental management or long-term administration, your property is in professional hands.",
+    sectionTitle: "Management Packages",
+    sectionDesc: "Comprehensive solutions for property owners and short-term rental hosts.",
     cta: "🏠 Contact Us for Housing",
     services: [
       {
-        icon: "AB", title: "Airbnb / Booking Management", tag: "Full Service",
-        desc: "We handle calendar sync, pricing optimization, guest communication, and check-in/out coordination.",
-        bullets: ["Calendar management", "Dynamic pricing", "Guest messaging", "Check-in/out"]
+        icon: "🏠", title: "Airbnb & Booking Management", tag: "Hosting",
+        desc: "Complete guest and listing management across 200+ global platforms.",
+        bullets: ["Listings on Airbnb, Booking.com & 200+ platforms", "Calendar management", "Guest messaging", "Check-in/Check-out coordination", "Cleaning services"]
       },
       {
-        icon: "¥", title: "Monthly / Yearly Administration", tag: "Transparent",
-        desc: "Detailed reports with invoices, occupancy rates, and cost tracking for clear oversight.",
-        bullets: ["Monthly/yearly reporting", "Document management", "Revenue tracking", "Team coordination"]
-      },
-      {
-        icon: "★", title: "Listing & Optimization", tag: "Enhanced",
-        desc: "We improve your listings with professional media and strategies to increase profitability.",
-        bullets: ["Professional photos", "Compelling descriptions", "Pricing strategy", "Review monitoring"]
+        icon: "📋", title: "Monthly / Yearly Administration", tag: "Maintenance",
+        desc: "Full property oversight, utility management, and technical maintenance.",
+        bullets: ["Apartment administration", "Electrical & Plumbing services", "Monthly cleaning (Client's choice)", "Monthly ventilation/Air circulation", "Photo reporting", "Utility bill payments (Water & Electricity)"]
       }
     ]
   },
   sq: {
     back: "← Kthehu pas",
     title: "Shërbimet e Strehimit & Hosting",
-    lead: "Ne kujdesemi për pronën tuaj nga A te ZH. Airbnb, Booking.com, ose qira afatgjata — ne menaxhojmë listimet, mysafirët, çmimet dhe raportimin.",
-    sectionTitle: "Shërbimet Tona",
-    sectionDesc: "Zgjidhje gjithëpërfshirëse për pronarët, pavarësisht nëse menaxhoni një apartament apo disa prona.",
-    cta: "🏠 Na Kontaktoni për Strehim",
+    lead: "Ne kujdesemi për pronën tuaj nga A te ZH. Pavarësisht nëse është menaxhim qiraje apo administrim afatgjatë, prona juaj është në duar profesionale.",
+    sectionTitle: "Paketat tona",
+    sectionDesc: "Zgjidhje gjithëpërfshirëse për pronarët e apartamenteve dhe mjediseve komerciale.",
+    cta: "🏠 Na Kontaktoni",
     services: [
       {
-        icon: "AB", title: "Menaxhim Airbnb / Booking", tag: "Shërbim i Plotë",
-        desc: "Ne merremi me sinkronizimin e kalendarit, optimizimin e çmimeve dhe komunikimin me mysafirët.",
-        bullets: ["Menaxhim kalendari", "Çmime dinamike", "Mesazhet me mysafirët", "Koordinim check-in/out"]
+        icon: "🏠", title: "Menaxhim Airbnb / Booking", tag: "Hosting",
+        desc: "Menaxhim i plotë i mysafirëve dhe listimeve në mbi 200 platforma globale.",
+        bullets: ["Listime ne Booking, Airbnb dhe 200+ platforma të tjera", "Menaxhim kalendari", "Mesazhe me mysafirët", "Koordinim check-in/check-out", "Shërbime pastrimi"]
       },
       {
-        icon: "¥", title: "Administrim Mujor / Vjetor", tag: "Transparent",
-        desc: "Raporte të detajuara me fatura, normat e zënies dhe ndjekjen e kostove për mbikëqyrje të qartë.",
-        bullets: ["Raportim mujor/vjetor", "Menaxhim dokumentesh", "Ndjekja e të ardhurave", "Koordinim me ekipet"]
-      },
-      {
-        icon: "★", title: "Listimi & Optimizimi", tag: "I Avancuar",
-        desc: "Ne përmirësojmë listimet tuaja me media profesionale dhe strategji për të rritur fitimin.",
-        bullets: ["Foto profesionale", "Përshkrime bindëse", "Strategjia e çmimeve", "Monitorim rishikimesh"]
+        icon: "📋", title: "Administrim Mujor / Vjetor", tag: "Mirëmbajtje",
+        desc: "Mbikëqyrje e plotë e pronës, menaxhim i faturave dhe mirëmbajtje teknike.",
+        bullets: ["Administrim apartamenti", "Shërbime elektrike/hidraulike", "Pastrim 1 herë në muaj (zgjedhja e klientit)", "Hapja e dritareve për ajrosje (1 herë në muaj)", "Raportime me foto", "Pagesë fature për ujin dhe energjinë elektrike"]
       }
     ]
   },
   de: {
     back: "← Zurück",
     title: "Wohn- & Hosting-Services",
-    lead: "Wir kümmern uns um Ihre Immobilie von A bis Z. Airbnb, Booking.com oder Langzeitmiete — wir verwalten Inserate, Gäste, Preise und Reporting.",
-    sectionTitle: "Unsere Dienstleistungen",
-    sectionDesc: "Umfassende Lösungen für Immobilieneigentümer, egal ob Sie eine einzelne Wohnung oder mehrere Mietobjekte verwalten.",
-    cta: "🏠 Kontaktieren Sie uns für Wohnen",
+    lead: "Wir kümmern uns um Ihre Immobilie von A bis Z.",
+    sectionTitle: "Management-Pakete",
+    sectionDesc: "Umfassende Lösungen für Eigentümer.",
+    cta: "🏠 Kontaktieren Sie uns",
     services: [
       {
-        icon: "AB", title: "Airbnb / Booking Management", tag: "Full Service",
-        desc: "Wir kümmern uns um Kalendersynchronisation, Preisoptimierung, Gästekommunikation und Check-in/out.",
-        bullets: ["Kalenderverwaltung", "Dynamische Preise", "Gästekommunikation", "Check-in/out"]
+        icon: "🏠", title: "Airbnb & Booking Management", tag: "Hosting",
+        desc: "Gästemanagement auf über 200 Plattformen.",
+        bullets: ["Listing auf 200+ Plattformen", "Kalenderverwaltung", "Gästekommunikation", "Check-in/out Koordination", "Reinigung"]
       },
       {
-        icon: "¥", title: "Monatliche / Jährliche Verwaltung", tag: "Transparent",
-        desc: "Detaillierte Berichte mit Rechnungen, Auslastungsraten und Kostenverfolgung für volle Übersicht.",
-        bullets: ["Monatliche/jährliche Berichte", "Dokumentenverwaltung", "Einnahmenverfolgung", "Teamkoordination"]
-      },
-      {
-        icon: "★", title: "Listing & Optimierung", tag: "Erweitert",
-        desc: "Wir verbessern Ihre Inserate mit professionellen Medien und Strategien zur Gewinnmaximierung.",
-        bullets: ["Professionelle Fotos", "Überzeugende Texte", "Preisstrategie", "Bewertungsmonitoring"]
+        icon: "📋", title: "Monatliche/Jährliche Verwaltung", tag: "Wartung",
+        desc: "Vollständige Immobilienüberwachung und Nebenkostenabrechnung.",
+        bullets: ["Wohnungsverwaltung", "Elektro- & Klempnernotdienst", "Monatliche Reinigung", "Lüftungsservice", "Fotodokumentation", "Zahlung von Strom & Wasser"]
       }
     ]
   },
   it: {
-    back: "← Torna indietro",
+    back: "← Indietro",
     title: "Servizi di Alloggio e Hosting",
-    lead: "Ci occupiamo della tua proprietà dalla A alla Z. Airbnb, Booking.com o affitti a lungo termine: gestiamo annunci, ospiti, prezzi e reportistica.",
-    sectionTitle: "I Nostri Servizi",
-    sectionDesc: "Soluzioni complete per proprietari di immobili, sia che gestiate un singolo appartamento o più affitti.",
-    cta: "🏠 Contattaci per l'Alloggio",
+    lead: "Ci occupiamo della tua proprietà dalla A alla Z.",
+    sectionTitle: "Pacchetti di Gestione",
+    sectionDesc: "Soluzioni complete per i proprietari.",
+    cta: "🏠 Contattaci",
     services: [
       {
-        icon: "AB", title: "Gestione Airbnb / Booking", tag: "Servizio Completo",
-        desc: "Gestiamo la sincronizzazione del calendario, l'ottimizzazione dei prezzi e la comunicazione con gli ospiti.",
-        bullets: ["Gestione calendario", "Prezzi dinamici", "Messaggistica ospiti", "Check-in/out"]
+        icon: "🏠", title: "Gestione Airbnb & Booking", tag: "Hosting",
+        desc: "Gestione completa su oltre 200 piattaforme.",
+        bullets: ["Annunci su 200+ piattaforme", "Gestione calendario", "Messaggistica ospiti", "Coordinamento check-in/out", "Pulizie"]
       },
       {
-        icon: "¥", title: "Amministrazione Mensile / Annuale", tag: "Trasparente",
-        desc: "Report dettagliati con fatture, tassi di occupazione e monitoraggio dei costi per una supervisione chiara.",
-        bullets: ["Report mensili/annuali", "Gestione documenti", "Monitoraggio ricavi", "Coordinamento team"]
-      },
-      {
-        icon: "★", title: "Annuncio e Ottimizzazione", tag: "Avanzato",
-        desc: "Miglioriamo i tuoi annunci con media professionali e strategie per aumentare la redditività.",
-        bullets: ["Foto professionali", "Descrizioni efficaci", "Strategia di prezzo", "Monitoraggio recensioni"]
-      }
-    ]
-  },
-  pl: {
-    back: "← Powrót",
-    title: "Usługi Mieszkaniowe i Hostingowe",
-    lead: "Zajmiemy się Twoją nieruchomością od A do Z. Airbnb, Booking.com lub najem długoterminowy — zarządzamy ofertami, gośćmi, cenami i raportami.",
-    sectionTitle: "Nasze Usługi",
-    sectionDesc: "Kompleksowe rozwiązania dla właścicieli nieruchomości, niezależnie od liczby zarządzanych obiektów.",
-    cta: "🏠 Skontaktuj się w sprawie najmu",
-    services: [
-      {
-        icon: "AB", title: "Zarządzanie Airbnb / Booking", tag: "Pełny Serwis",
-        desc: "Obsługujemy synchronizację kalendarza, optymalizację cen, komunikację z gośćmi i koordynację check-in/out.",
-        bullets: ["Zarządzanie kalendarzem", "Dynamiczne ceny", "Komunikacja z gośćmi", "Check-in/out"]
-      },
-      {
-        icon: "¥", title: "Administracja Miesięczna / Roczna", tag: "Przejrzystość",
-        desc: "Szczegółowe raporty z fakturami, obłożeniem i śledzeniem kosztów dla pełnej kontroli.",
-        bullets: ["Raporty miesięczne/roczne", "Zarządzanie dokumentami", "Śledzenie przychodów", "Koordynacja zespołów"]
-      },
-      {
-        icon: "★", title: "Optymalizacja Oferty", tag: "Ulepszone",
-        desc: "Ulepszamy Twoje oferty za pomocą profesjonalnych mediów i strategii zwiększających zysk.",
-        bullets: ["Profesjonalne zdjęcia", "Przekonujące opisy", "Strategia cenowa", "Monitorowanie opinii"]
-      }
-    ]
-  },
-  cs: {
-    back: "← Zpět",
-    title: "Služby bydlení a hostingu",
-    lead: "Postaráme se o vaši nemovitost od A do Z. Airbnb, Booking.com nebo dlouhodobé pronájmy — spravujeme inzerci, hosty, ceny a reporty.",
-    sectionTitle: "Naše služby",
-    sectionDesc: "Komplexní řešení pro majitele nemovitostí, ať už spravujete jeden byt nebo více objektů.",
-    cta: "🏠 Kontaktujte nás ohledmě bydlení",
-    services: [
-      {
-        icon: "AB", title: "Správa Airbnb / Booking", tag: "Full Service",
-        desc: "Zajišťujeme synchronizaci kalendáře, optimalizaci cen, komunikaci s hosty a koordinaci check-in/out.",
-        bullets: ["Správa kalendáře", "Dynamické ceny", "Komunikace s hosty", "Check-in/out"]
-      },
-      {
-        icon: "¥", title: "Měsíční / Roční správa", tag: "Transparentní",
-        desc: "Podrobné reporty s fakturami, obsazeností a sledováním nákladů pro jasný přehled.",
-        bullets: ["Měsíční/roční reporty", "Správa dokumentů", "Sledování příjmů", "Koordinace týmů"]
-      },
-      {
-        icon: "★", title: "Listing a optimalizace", tag: "Vylepšené",
-        desc: "Vylepšujeme vaše inzeráty pomocí profesionálních médií a strategií pro zvýšení zisku.",
-        bullets: ["Profesionální fotky", "Poutavé popisy", "Cenová strategie", "Sledování recenzí"]
-      }
-    ]
-  },
-  sk: {
-    back: "← Späť",
-    title: "Služby bývania a hostingu",
-    lead: "Postaráme sa o vašu nehnuteľnosť od A do Z. Airbnb, Booking.com alebo dlhodobé prenájmy — spravujeme inzerciu, hostí, ceny a reporty.",
-    sectionTitle: "Naše služby",
-    sectionDesc: "Komplexné riešenia pre majiteľov nehnuteľností, či už spravujete jeden byt alebo viac objektov.",
-    cta: "🏠 Kontaktujte nás ohľadom bývania",
-    services: [
-      {
-        icon: "AB", title: "Správa Airbnb / Booking", tag: "Full Service",
-        desc: "Zabezpečujeme synchronizáciu kalendára, optimalizáciu cien, komunikáciu s hosťami a koordináciu check-in/out.",
-        bullets: ["Správa kalendára", "Dynamické ceny", "Komunikácia s hosťami", "Check-in/out"]
-      },
-      {
-        icon: "¥", title: "Mesačná / Ročná správa", tag: "Transparentné",
-        desc: "Podrobné reporty s faktúrami, obsadenosťou a sledovaním nákladov pre jasný prehľad.",
-        bullets: ["Mesačné/ročné reporty", "Správa dokumentov", "Sledovanie príjmov", "Koordinácia tímov"]
-      },
-      {
-        icon: "★", title: "Listing a optimalizácia", tag: "Vylepšené",
-        desc: "Vylepšujeme vaše inzeráty pomocou profesionálnych médií a stratégií pre zvýšenie zisku.",
-        bullets: ["Profesionálne fotky", "Pútavé popisy", "Cenová stratégia", "Sledovanie recenzií"]
+        icon: "📋", title: "Amministrazione Mensile/Annuale", tag: "Manutenzione",
+        desc: "Supervisione totale e gestione delle utenze.",
+        bullets: ["Amministrazione appartamento", "Servizi elettrici e idraulici", "Pulizia mensile", "Ventilazione mensile", "Report fotografici", "Pagamento bollette luce e acqua"]
       }
     ]
   }
 };
 
-// 3. Apply translations
-const content = i18n[lang] || i18n.en;
+// Apply translations
+const currentContent = i18n[lang] || i18n.sq;
+const displayServices = (currentContent.services && currentContent.services.length > 0) ? currentContent.services : i18n.sq.services;
 
-document.getElementById("backBtn").innerText = content.back;
-document.getElementById("pageTitle").innerText = content.title;
-document.getElementById("pageLead").innerText = content.lead;
-document.getElementById("sectionTitle").innerText = content.sectionTitle;
-document.getElementById("sectionDesc").innerText = content.sectionDesc;
-document.getElementById("ctaBtn").innerText = content.cta;
+// These lines will now work correctly
+document.getElementById("backBtn").innerText = currentContent.back;
+document.getElementById("pageTitle").innerText = currentContent.title;
+document.getElementById("pageLead").innerText = currentContent.lead;
+document.getElementById("sectionTitle").innerText = currentContent.sectionTitle;
+document.getElementById("sectionDesc").innerText = currentContent.sectionDesc;
+document.getElementById("ctaBtn").innerText = currentContent.cta;
 
-// 4. Render Grid
+// Render Grid
 const grid = document.getElementById("servicesGrid");
-content.services.forEach(s => {
+grid.innerHTML = "";
+displayServices.forEach(s => {
   grid.innerHTML += `
     <div class="card">
       <div class="icon">${s.icon}</div>
