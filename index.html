@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="sq">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -699,7 +699,7 @@
           <div class="contactItems">
             <div class="contactItem">
               <div class="k" id="cEmailK">Email</div>
-              <div class="v">hello@absolutions.com</div>
+              <div class="v">info@absolutions.com</div>
             </div>
             <div class="contactItem">
               <div class="k" id="cPhoneK">Phone</div>
@@ -1248,8 +1248,8 @@ const i18n = {
   function detectLang(){
     const saved = localStorage.getItem(LS_KEY);
     if(saved && i18n[saved]) return saved;
-    const n = (navigator.language || "en").toLowerCase().split("-")[0];
-    return i18n[n] ? n : "en";
+    const n = (navigator.language || "sq").toLowerCase().split("-")[0];
+    return i18n[n] ? n : "sq";
   }
 
   function renderCards(gridEl, cards){
@@ -1455,7 +1455,7 @@ function setMobileMenuVisibility(){
     const msg = $("fMsg").value.trim();
     const subject = encodeURIComponent("AB Solutions — New inquiry");
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}`);
-    window.location.href = `mailto:hello@absolutions.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:info@absolutions.com?subject=${subject}&body=${body}`;
   });
 
   // Init
