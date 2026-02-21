@@ -512,7 +512,7 @@
 
       <div class="actions">
         <select class="select" id="langSelect" aria-label="Language selector">
-          <option value="sq" selected>Shqip</option>
+          <option value="sq">Shqip</option>
           <option value="en">English</option>
           <option value="de">Deutsch</option>
           <option value="pl">Polski</option>
@@ -1248,7 +1248,7 @@ const i18n = {
   function detectLang(){
     const saved = localStorage.getItem(LS_KEY);
     if(saved && i18n[saved]) return saved;
-    const n = (navigator.language || "sq").toLowerCase().split("-")[0];
+    const n = ("sq").toLowerCase().split("-")[0];
     return i18n[n] ? n : "sq";
   }
 
